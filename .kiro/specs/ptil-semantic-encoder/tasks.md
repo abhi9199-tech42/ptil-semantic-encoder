@@ -36,7 +36,7 @@ This implementation plan converts the PTIL semantic encoder design into a series
 
 - [x] 3. Implement ROOT mapper component
   - [x] 3.1 Create ROOTMapper class with predicate-to-ROOT mapping
-    - Build comprehensive predicate dictionary mapping surface forms to ROOTs
+    - Build predicate dictionary mapping surface forms to ROOTs
     - Implement disambiguation using POS tags and dependency context
     - Handle unknown predicates with fallback to generic ROOTs
     - _Requirements: 1.4, 2.2, 5.4_
@@ -225,13 +225,13 @@ This implementation plan converts the PTIL semantic encoder design into a series
 
 
 - [x] 14. Final integration and validation
-  - [x] 14.1 Create comprehensive example scripts and documentation
+  - [x] 14.1 Create example scripts and documentation
     - Build example usage scripts demonstrating key features
     - Add performance benchmarking and validation scripts
     - Create API documentation and usage examples
     - _Requirements: All requirements validation_
 
-  - [x] 14.2 Write comprehensive integration tests
+  - [x] 14.2 Write integration tests
     - Test all properties together in realistic scenarios
     - Validate system boundaries and limitations
     - Test error handling across all components
@@ -242,7 +242,7 @@ This implementation plan converts the PTIL semantic encoder design into a series
 
 ## Notes
 
-- All tasks are required for comprehensive implementation
+- All tasks are required for implementation
 - Each task references specific requirements for traceability
 - Checkpoints ensure incremental validation
 - Property tests validate universal correctness properties using Hypothesis

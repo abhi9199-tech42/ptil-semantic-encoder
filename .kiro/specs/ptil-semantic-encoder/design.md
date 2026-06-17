@@ -405,7 +405,7 @@ Based on the prework analysis, the following properties validate the system's co
 
 ### Dual Testing Approach
 
-The PTIL system requires both unit testing and property-based testing for comprehensive validation:
+The PTIL system requires both unit testing and property-based testing for validation:
 
 **Unit Tests** focus on:
 - Specific examples demonstrating correct behavior
@@ -422,7 +422,7 @@ The PTIL system requires both unit testing and property-based testing for compre
 ### Property-Based Testing Configuration
 
 **Framework Selection**: 
-- **Python**: Hypothesis library for comprehensive property testing
+- **Python**: Hypothesis library for property testing
 - **TypeScript/JavaScript**: fast-check for web-based implementations
 - **Java**: junit-quickcheck for enterprise environments
 
@@ -447,7 +447,7 @@ The PTIL system requires both unit testing and property-based testing for compre
 **Real-World Data**:
 - Multilingual parallel corpora for cross-lingual validation
 - Domain-specific texts for ROOT coverage analysis
-- Edge case collections for robustness testing
+- Edge case collections for reliability testing
 
 ### Performance Testing
 

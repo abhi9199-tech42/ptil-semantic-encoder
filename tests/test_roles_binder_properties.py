@@ -2,7 +2,7 @@
 Property-based tests for ROLESBinder component.
 
 These tests validate universal properties of semantic role assignment
-using Hypothesis for comprehensive input coverage.
+using Hypothesis for input coverage.
 """
 
 import pytest

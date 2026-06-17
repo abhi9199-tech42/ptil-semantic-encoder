@@ -2,7 +2,7 @@
 ROOT mapper component for PTIL semantic encoder.
 
 This module provides the ROOTMapper class that maps surface predicates to semantic ROOT primitives
-using a comprehensive predicate dictionary and disambiguation based on POS tags and dependency context.
+using a predicate dictionary and disambiguation based on POS tags and dependency context.
 """
 
 from typing import Dict, List, Set, Optional, Tuple
@@ -13,7 +13,7 @@ class ROOTMapper:
     """
     Maps surface predicates to semantic ROOT primitives.
     
-    Uses a comprehensive predicate dictionary with disambiguation based on POS tags
+    Uses a predicate dictionary with disambiguation based on POS tags
     and dependency context. Handles unknown predicates with fallback to generic ROOTs.
     """
     
@@ -54,7 +54,7 @@ class ROOTMapper:
     
     def _build_predicate_dictionary(self) -> Dict[str, Set[ROOT]]:
         """
-        Build comprehensive predicate dictionary mapping surface forms to ROOTs.
+        Build predicate dictionary mapping surface forms to ROOTs.
         
         Returns:
             Dictionary mapping predicates to sets of possible ROOTs

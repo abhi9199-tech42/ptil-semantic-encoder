@@ -43,7 +43,7 @@ class TokenizerCompatibilityValidator:
     Validator for ensuring CSC output compatibility with standard tokenizers.
     
     Tests serialized CSC format against BPE, Unigram, and WordPiece tokenizer
-    requirements to ensure seamless integration with existing LLM architectures.
+    requirements to ensure integration with existing LLM architectures.
     """
     
     def __init__(self):
@@ -453,7 +453,7 @@ class TokenizerCompatibilityValidator:
     
     def generate_compatibility_report(self, batch_results: Dict[str, Any]) -> str:
         """
-        Generate a comprehensive tokenizer compatibility report.
+        Generate a tokenizer compatibility report.
         
         Args:
             batch_results: Results from validate_batch_compatibility

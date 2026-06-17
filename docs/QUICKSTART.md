@@ -98,7 +98,7 @@ from ptil import PTILEncoder, EfficiencyAnalyzer
 encoder = PTILEncoder()
 analyzer = EfficiencyAnalyzer()
 
-text = "The scientist discovered a groundbreaking new theory."
+text = "The scientist discovered a new theory."
 metrics = analyzer.analyze_efficiency(text, encoder)
 
 print(f"Original tokens: {metrics.original_tokens}")
@@ -212,7 +212,7 @@ pytest tests/test_efficiency_properties.py -v
 
 ## Next Steps
 
-- **Read the [User Guide](USER_GUIDE.md)** for comprehensive documentation
+- **Read the [User Guide](USER_GUIDE.md)** for detailed documentation
 - **Explore the [API Reference](API_REFERENCE.md)** for detailed API documentation
 - **Check the [Requirements Traceability](REQUIREMENTS_TRACEABILITY.md)** to understand validation coverage
 - **Review example scripts** in the `examples/` directory

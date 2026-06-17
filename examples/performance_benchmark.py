@@ -48,7 +48,7 @@ class PerformanceBenchmark:
             # Complex sentences
             "The experienced teacher who had worked at the school for twenty years decided to retire next summer.",
             "Although it was raining heavily, the determined athletes continued their training session in the park.",
-            "The innovative technology that was developed by the research team could potentially revolutionize the entire industry.",
+            "The innovative technology that was developed by the research team could potentially transform the industry.",
             
             # Various sentence types
             "Please close the door quietly.",  # Command
@@ -58,7 +58,7 @@ class PerformanceBenchmark:
             
             # Different domains
             "The patient underwent surgery yesterday.",  # Medical
-            "The stock market crashed dramatically.",  # Financial
+            "The stock market crashed sharply.",  # Financial
             "Scientists discovered a new species.",  # Scientific
             "The chef prepared a delicious meal.",  # Culinary
         ]

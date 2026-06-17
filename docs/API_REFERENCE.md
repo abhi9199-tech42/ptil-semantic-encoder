@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Pre-Tokenization Intelligence Layer (PTIL) provides a comprehensive API for converting natural language text into Compressed Semantic Code (CSC) representations. This document covers all public classes, methods, and data structures.
+The Pre-Tokenization Intelligence Layer (PTIL) provides an API for converting natural language text into Compressed Semantic Code (CSC) representations. This document covers all public classes, methods, and data structures.
 
 ## Table of Contents
 
@@ -608,4 +608,4 @@ import ptil
 print(f"PTIL Version: {ptil.__version__}")
 ```
 
-This API reference provides comprehensive coverage of all PTIL functionality. For additional examples and advanced usage patterns, see the example scripts in the `examples/` directory.
+This API reference covers all PTIL functionality. For additional examples and advanced usage patterns, see the example scripts in the `examples/` directory.

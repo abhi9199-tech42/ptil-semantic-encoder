@@ -613,7 +613,7 @@ for test in test_cases:
 
 ## Summary
 
-PTIL provides a powerful semantic abstraction layer that:
+PTIL provides a semantic abstraction layer that:
 
 - Reduces token count by 60-80%
 - Makes meaning structure explicit

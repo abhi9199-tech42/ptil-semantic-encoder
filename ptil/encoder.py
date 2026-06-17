@@ -36,7 +36,7 @@ class PTILEncoder:
     Main PTIL encoder pipeline integrating all semantic processing components.
     
     Provides end-to-end text-to-CSC processing with deterministic output,
-    error handling, and graceful degradation for robust semantic encoding.
+    error handling, and graceful degradation for consistent semantic encoding.
     """
     
     def __init__(self, model_name: str = "en_core_web_sm", language: Optional[str] = None):

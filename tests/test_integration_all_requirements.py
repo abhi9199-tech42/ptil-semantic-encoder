@@ -165,7 +165,7 @@ class TestAllRequirementsTogether:
         """Test Req 7-8: Token efficiency and training integration."""
         encoder = PTILEncoder()
         analyzer = EfficiencyAnalyzer(encoder)
-        text = "The experienced researcher discovered a groundbreaking new theory."
+        text = "The experienced researcher discovered a new theory."
         
         # Req 7: Token efficiency
         metrics = analyzer.analyze_text(text)
@@ -383,7 +383,7 @@ class TestEfficiencyIntegration:
         sentences = [
             "The cat sleeps.",
             "The quick brown fox jumps over the lazy dog.",
-            "The scientist discovered a groundbreaking new theory."
+            "The scientist discovered a new theory."
         ]
         
         all_metrics = []
@@ -448,8 +448,8 @@ class TestRealisticScenarios:
         news_sentences = [
             "The president announced new economic policies yesterday.",
             "Scientists discovered a new species in the Amazon rainforest.",
-            "The stock market crashed dramatically on Monday.",
-            "Researchers published groundbreaking findings in Nature."
+            "The stock market crashed sharply on Monday.",
+            "Researchers published new findings in Nature."
         ]
         
         for sentence in news_sentences:

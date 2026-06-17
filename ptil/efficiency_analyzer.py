@@ -34,7 +34,7 @@ class EfficiencyAnalyzer:
     """
     Analyzer for measuring and validating token reduction efficiency.
     
-    Provides comprehensive token counting, reduction measurement, and validation
+    Provides token counting, reduction measurement, and validation
     against the required 60-80% token reduction targets.
     """
     
@@ -199,7 +199,7 @@ class EfficiencyAnalyzer:
     
     def generate_efficiency_report(self, metrics_list: List[EfficiencyMetrics]) -> str:
         """
-        Generate a comprehensive efficiency report.
+        Generate an efficiency report.
         
         Args:
             metrics_list: List of efficiency metrics

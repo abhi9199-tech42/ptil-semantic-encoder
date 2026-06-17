@@ -2,7 +2,7 @@
 Property-based tests for PTIL OPS extractor component.
 
 Tests universal properties that should hold across all inputs for operator extraction functionality.
-Uses Hypothesis for comprehensive property testing.
+Uses Hypothesis for property testing.
 """
 
 import pytest

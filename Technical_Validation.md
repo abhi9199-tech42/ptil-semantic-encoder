@@ -1,6 +1,6 @@
 # Technical Validation: Pre-Tokenization Intelligence Layer (PTIL)
 
-This document provides a comprehensive overview of the technical validation for the PTIL system, including performance benchmarks, architectural diagrams, theoretical foundations, and available demonstration scripts.
+This document provides an overview of the technical validation for the PTIL system, including performance benchmarks, architectural diagrams, theoretical foundations, and available demonstration scripts.
 
 ---
 

@@ -143,7 +143,7 @@ class LinguisticAnalyzer:
     
     def analyze(self, text: str) -> LinguisticAnalysis:
         """
-        Performs comprehensive linguistic analysis on input text.
+        Performs linguistic analysis on input text.
         
         Args:
             text: Raw input text to analyze

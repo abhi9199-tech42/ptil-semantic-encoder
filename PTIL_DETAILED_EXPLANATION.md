@@ -584,7 +584,7 @@ Training on CSC only from the start would:
 - **Reduce Flexibility**: Models become too dependent on semantic preprocessing
 - **Limit Applications**: Some tasks benefit from surface-level information
 - **Generalization Issues**: Models may not generalize well to surface variations
-- **Robustness**: Less robust to CSC generation errors
+- **Reliability**: Less reliable with CSC generation errors
 
 ### Why mix CSC with original text?
 
@@ -862,10 +862,10 @@ PTIL sits in the:
     
 Actual validation revealed that the **ROLES Binder** is the most fragile component, specifically regarding:
 - **Passive Voice Ambiguity**: Distinguishing between agents and patients in passive constructions required specific logic fixes.
-- **Implicit Agents**: Handling sentences with no clear agent (imperatives, natural events) requires robust fallback logic.
+- **Implicit Agents**: Handling sentences with no clear agent (imperatives, natural events) requires fallback logic.
 - **Dependency Reliance**: It is heavily dependent on the quality of the underlying dependency parser (spaCy).
 
-Originally, ROOT mapping was thought to be most fragile, but validation showed it to be surprisingly robust due to the finite set of primitives.
+Originally, ROOT mapping was thought to be most fragile, but validation showed it to be stable due to the finite set of primitives.
 
 ### What would you remove if forced to simplify?
 

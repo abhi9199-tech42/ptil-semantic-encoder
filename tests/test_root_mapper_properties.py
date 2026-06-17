@@ -2,7 +2,7 @@
 Property-based tests for PTIL ROOT mapper component.
 
 Tests universal properties that should hold across all inputs for ROOT mapping functionality.
-Uses Hypothesis for comprehensive property testing.
+Uses Hypothesis for property testing.
 """
 
 import pytest
