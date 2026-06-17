@@ -8,7 +8,7 @@ This module defines the fundamental data structures used throughout the PTIL sys
 
 from enum import Enum
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional, Tuple
+from typing import List, Dict, Optional, Tuple, Any
 
 
 class ROOT(Enum):
@@ -102,6 +102,7 @@ class LinguisticAnalysis:
     tense_markers: Dict[str, List[int]]  # Tense type -> token indices
     aspect_markers: Dict[str, List[int]]  # Aspect type -> token indices
     lemmas: List[str] = field(default_factory=list)
+    doc: Optional[Any] = None  # spaCy Doc object, set by LinguisticAnalyzer
 
 
 @dataclass

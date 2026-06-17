@@ -183,7 +183,8 @@ class LinguisticAnalyzer:
             dependencies=dependencies,
             negation_markers=negation_markers,
             tense_markers=tense_markers,
-            aspect_markers=aspect_markers
+            aspect_markers=aspect_markers,
+            doc=doc
         )
     
     def _extract_dependencies(self, doc) -> List[Tuple[int, str, int]]:

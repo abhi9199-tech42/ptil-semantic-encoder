@@ -9,17 +9,7 @@ and graceful degradation.
 import logging
 from typing import List, Dict, Optional, Any
 from dataclasses import dataclass
-from .models import CSC, ROOT, LinguisticAnalysis
-
-
-@dataclass
-class TrainingConfig:
-    """Configuration for training format output generation."""
-    format_type: str = "standard"  # "standard", "csc_only", "mixed"
-    csc_weight: float = 1.0  # Weight for CSC in mixed format
-    original_weight: float = 1.0  # Weight for original text in mixed format
-    separator: str = " "  # Separator between CSC and original text
-    include_brackets: bool = True  # Whether to include [CSC] and [TEXT] brackets
+from .models import CSC, ROOT, META, Operator, Role, Entity, LinguisticAnalysis
 from .linguistic_analyzer import LinguisticAnalyzer
 from .root_mapper import ROOTMapper
 from .ops_extractor import OPSExtractor
@@ -29,6 +19,16 @@ from .csc_generator import CSCGenerator
 from .csc_serializer import CSCSerializer
 from .compact_serializer import CompactCSCSerializer
 from .ultra_compact_serializer import UltraCompactCSCSerializer
+
+
+@dataclass
+class TrainingConfig:
+    """Configuration for training format output generation."""
+    format_type: str = "standard"
+    csc_weight: float = 1.0
+    original_weight: float = 1.0
+    separator: str = " "
+    include_brackets: bool = True
 
 
 class PTILEncoder:
@@ -58,7 +58,7 @@ class PTILEncoder:
             self.linguistic_analyzer = LinguisticAnalyzer(model_name, language)
             self.root_mapper = ROOTMapper()
             self.ops_extractor = OPSExtractor()
-            self.roles_binder = ROLESBinder(model_name)
+            self.roles_binder = ROLESBinder()
             self.meta_detector = METADetector()
             self.csc_generator = CSCGenerator()
             self.csc_serializer = CSCSerializer()
@@ -424,7 +424,7 @@ class PTILEncoder:
             self.logger.warning(f"ROOT mapping failed: {e}. Using fallback.")
             return ROOT.EXISTENCE
     
-    def _extract_operators(self, analysis: LinguisticAnalysis) -> List:
+    def _extract_operators(self, analysis: LinguisticAnalysis) -> List[Operator]:
         """
         Extract operators with error handling.
         
@@ -440,7 +440,7 @@ class PTILEncoder:
             self.logger.warning(f"Operator extraction failed: {e}")
             return []
     
-    def _bind_roles(self, analysis: LinguisticAnalysis, root: ROOT) -> Dict:
+    def _bind_roles(self, analysis: LinguisticAnalysis, root: ROOT) -> Dict[Role, Entity]:
         """
         Bind semantic roles with error handling.
         
@@ -457,7 +457,7 @@ class PTILEncoder:
             self.logger.warning(f"Role binding failed: {e}")
             return {}
     
-    def _detect_meta(self, analysis: LinguisticAnalysis):
+    def _detect_meta(self, analysis: LinguisticAnalysis) -> Optional[META]:
         """
         Detect META component with error handling.
         
