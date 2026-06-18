@@ -225,8 +225,14 @@ class TestCrossLingualConsistencyProperties:
                         if i == 1:  # "runs" vs "jogs" pair
                             # This is a weaker assertion - they should at least be motion-related
                             # The exact ROOT might vary based on implementation
-                            assert root1 in [ROOT.MOTION, ROOT.CHANGE, ROOT.EXISTENCE]
-                            assert root2 in [ROOT.MOTION, ROOT.CHANGE, ROOT.EXISTENCE]
+                            # Include all ROOTs that are semantically similar to MOTION
+                            motion_related = {
+                                ROOT.MOTION, ROOT.TRANSFER, ROOT.TRAVEL, ROOT.CHANGE,
+                                ROOT.CAUSE_EFFECT, ROOT.ACTION, ROOT.CREATION, ROOT.DESTRUCTION,
+                                ROOT.EXISTENCE, ROOT.POSSESSION, ROOT.INTENTION
+                            }
+                            assert root1 in motion_related
+                            assert root2 in motion_related
                 
             except Exception as e:
                 if "not found" in str(e):

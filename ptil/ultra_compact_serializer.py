@@ -19,10 +19,10 @@ class UltraCompactCSCSerializer:
     
     def __init__(self):
         """Initialize with ultra-compact encoding mappings."""
-        # ROOT mappings - single digits
+        # ROOT mappings - single chars (digits, uppercase, symbols)
         self.root_codes = {
             ROOT.MOTION: "1",
-            ROOT.TRANSFER: "2", 
+            ROOT.TRANSFER: "2",
             ROOT.COMMUNICATION: "3",
             ROOT.COGNITION: "4",
             ROOT.PERCEPTION: "5",
@@ -31,7 +31,50 @@ class UltraCompactCSCSerializer:
             ROOT.CHANGE: "8",
             ROOT.POSSESSION: "9",
             ROOT.INTENTION: "A",
-            ROOT.EXISTENCE: "0"  # Most common, shortest
+            ROOT.EXISTENCE: "0",
+            ROOT.EMOTION: "B",
+            ROOT.DESIRE: "C",
+            ROOT.PREFERENCE: "D",
+            ROOT.JOY: "E",
+            ROOT.SADNESS: "F",
+            ROOT.ANGER: "G",
+            ROOT.FEAR: "H",
+            ROOT.EVALUATION: "I",
+            ROOT.COMPARISON: "J",
+            ROOT.JUDGMENT: "K",
+            ROOT.APPROVAL: "L",
+            ROOT.CRITICISM: "M",
+            ROOT.SOCIAL: "N",
+            ROOT.COOPERATION: "O",
+            ROOT.CONFLICT: "P",
+            ROOT.AGREEMENT: "Q",
+            ROOT.PROMISE: "R",
+            ROOT.THREAT: "S",
+            ROOT.REQUEST: "T",
+            ROOT.CAUSATION: "U",
+            ROOT.PREVENTION: "V",
+            ROOT.ENABLEMENT: "W",
+            ROOT.ATTEMPT: "X",
+            ROOT.SUCCESS: "Y",
+            ROOT.FAILURE: "Z",
+            ROOT.ANALYSIS: "!",
+            ROOT.MEMORY: "@",
+            ROOT.LEARNING: "#",
+            ROOT.TEACHING: "$",
+            ROOT.DECISION: "%",
+            ROOT.BELIEF: "^",
+            ROOT.STATE: "&",
+            ROOT.PROPERTY: "*",
+            ROOT.QUANTITY: "(",
+            ROOT.TIME_RELATION: ")",
+            ROOT.LOCATION_STATE: "-",
+            ROOT.EXPERIENCE: "+",
+            ROOT.ASSISTANCE: "[",
+            ROOT.TRAVEL: "]",
+            ROOT.CAUSE_EFFECT: "{",
+            ROOT.ACTION: "}",
+            ROOT.CONSUMPTION: "<",
+            ROOT.REFUSAL: ">",
         }
         
         # Operator mappings - single characters (hex-like)
@@ -65,14 +108,25 @@ class UltraCompactCSCSerializer:
         
         # Role mappings - single letters (most common first)
         self.role_codes = {
-            Role.AGENT: "a",      # Most common
-            Role.THEME: "t",      # Very common
-            Role.GOAL: "g",       # Common
-            Role.LOCATION: "l",   # Common
-            Role.TIME: "m",       # Common (tiMe)
-            Role.SOURCE: "s",     # Less common
-            Role.PATIENT: "p",    # Less common
-            Role.INSTRUMENT: "i", # Least common
+            Role.AGENT: "a",
+            Role.THEME: "t",
+            Role.GOAL: "g",
+            Role.LOCATION: "l",
+            Role.TIME: "m",
+            Role.SOURCE: "s",
+            Role.PATIENT: "p",
+            Role.INSTRUMENT: "i",
+            Role.EXPERIENCER: "e",
+            Role.STIMULUS: "u",
+            Role.STANDARD: "d",
+            Role.VERDICT: "v",
+            Role.RESULT: "r",
+            Role.PATH: "h",
+            Role.ATTRIBUTE: "b",
+            Role.VALUE: "w",
+            Role.COMPARISON: "c",
+            Role.CONTENT: "n",
+            Role.MANNER: "y",
         }
         
         # META mappings - single digits (most common first)
@@ -251,13 +305,24 @@ class UltraCompactCSCSerializer:
             # Sort roles for consistency, prioritize common ones
             role_priority = {
                 Role.AGENT: 0,
-                Role.THEME: 1, 
+                Role.THEME: 1,
                 Role.GOAL: 2,
                 Role.LOCATION: 3,
                 Role.TIME: 4,
                 Role.SOURCE: 5,
                 Role.PATIENT: 6,
-                Role.INSTRUMENT: 7
+                Role.INSTRUMENT: 7,
+                Role.EXPERIENCER: 8,
+                Role.STIMULUS: 9,
+                Role.STANDARD: 10,
+                Role.VERDICT: 11,
+                Role.RESULT: 12,
+                Role.PATH: 13,
+                Role.ATTRIBUTE: 14,
+                Role.VALUE: 15,
+                Role.COMPARISON: 16,
+                Role.CONTENT: 17,
+                Role.MANNER: 18,
             }
             
             sorted_roles = sorted(
@@ -412,7 +477,8 @@ Target: 80%+ token reduction through maximum compression.
             return False
         
         # Should start with ROOT code
-        if not serialized[0] in "0123456789A":
+        valid_starts = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-+[]{}<>"
+        if serialized[0] not in valid_starts:
             return False
         
         return True

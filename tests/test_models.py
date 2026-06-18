@@ -45,8 +45,11 @@ class TestEnums:
     def test_role_enum_values(self):
         """Test Role enum contains core semantic roles."""
         expected_roles = {
-            "AGENT", "PATIENT", "THEME", "GOAL", "SOURCE", 
-            "INSTRUMENT", "LOCATION", "TIME"
+            "AGENT", "PATIENT", "THEME", "GOAL", "SOURCE",
+            "INSTRUMENT", "LOCATION", "TIME",
+            "EXPERIENCER", "STIMULUS", "STANDARD", "VERDICT",
+            "RESULT", "PATH", "ATTRIBUTE", "VALUE",
+            "COMPARISON", "CONTENT", "MANNER"
         }
         actual_roles = {role.value for role in Role}
         assert expected_roles == actual_roles

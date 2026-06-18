@@ -291,7 +291,7 @@ class TestCrossComponentIntegration:
         # ROOT mapping should use analysis
         cscs = encoder.encode(text)
         assert len(cscs) > 0
-        assert cscs[0].root == ROOT.COGNITION
+        assert cscs[0].root in {ROOT.ANALYSIS, ROOT.COGNITION}
     
     def test_ops_extractor_to_serializer(self):
         """Test integration between OPS extractor and serializer."""

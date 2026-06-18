@@ -20,8 +20,13 @@ from .tokenizer_compatibility import TokenizerCompatibilityValidator, Compatibil
 from .compact_serializer import CompactCSCSerializer
 from .ultra_compact_serializer import UltraCompactCSCSerializer
 from .cross_lingual_validator import CrossLingualValidator
+from .config import PTILConfig
+from .logging_context import PTILContext, PTILogger
+from .cache import LRUCache
+from .metrics import MetricsCollector
+from .learning import LearnedROOTMapper
 
-__version__ = "0.1.0"
+__version__ = "0.4.0"
 __all__ = [
     "ROOT",
     "Operator", 
@@ -47,5 +52,11 @@ __all__ = [
     "TokenizerType",
     "CompactCSCSerializer",
     "UltraCompactCSCSerializer",
-    "CrossLingualValidator"
+    "CrossLingualValidator",
+    "PTILConfig",
+    "PTILContext",
+    "PTILogger",
+    "LRUCache",
+    "MetricsCollector",
+    "LearnedROOTMapper",
 ]

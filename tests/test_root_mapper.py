@@ -44,9 +44,9 @@ class TestROOTMapper:
         result = self.mapper.map_predicate("plan", "VB", {})
         assert result in {ROOT.COGNITION, ROOT.INTENTION}
         
-        # "want" can be INTENTION or POSSESSION
+        # "want" maps to DESIRE in expanded ontology
         result = self.mapper.map_predicate("want", "VB", {})
-        assert result in {ROOT.INTENTION, ROOT.POSSESSION}
+        assert result in {ROOT.DESIRE, ROOT.INTENTION, ROOT.POSSESSION}
     
     def test_pos_based_disambiguation(self):
         """Test POS tag-based disambiguation."""

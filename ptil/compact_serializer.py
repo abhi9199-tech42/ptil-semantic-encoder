@@ -19,10 +19,10 @@ class CompactCSCSerializer:
     
     def __init__(self):
         """Initialize the compact serializer with encoding mappings."""
-        # ROOT mappings (R + single digit/letter)
+        # ROOT mappings (R + code)
         self.root_codes = {
             ROOT.MOTION: "R1",
-            ROOT.TRANSFER: "R2", 
+            ROOT.TRANSFER: "R2",
             ROOT.COMMUNICATION: "R3",
             ROOT.COGNITION: "R4",
             ROOT.PERCEPTION: "R5",
@@ -31,7 +31,50 @@ class CompactCSCSerializer:
             ROOT.CHANGE: "R8",
             ROOT.POSSESSION: "R9",
             ROOT.INTENTION: "RA",
-            ROOT.EXISTENCE: "RB"
+            ROOT.EXISTENCE: "RB",
+            ROOT.EMOTION: "RC",
+            ROOT.DESIRE: "RD",
+            ROOT.PREFERENCE: "RE",
+            ROOT.JOY: "RF",
+            ROOT.SADNESS: "RG",
+            ROOT.ANGER: "RH",
+            ROOT.FEAR: "RI",
+            ROOT.EVALUATION: "RJ",
+            ROOT.COMPARISON: "RK",
+            ROOT.JUDGMENT: "RL",
+            ROOT.APPROVAL: "RM",
+            ROOT.CRITICISM: "RN",
+            ROOT.SOCIAL: "RO",
+            ROOT.COOPERATION: "RP",
+            ROOT.CONFLICT: "RQ",
+            ROOT.AGREEMENT: "RR",
+            ROOT.PROMISE: "RS",
+            ROOT.THREAT: "RT",
+            ROOT.REQUEST: "RU",
+            ROOT.CAUSATION: "RV",
+            ROOT.PREVENTION: "RW",
+            ROOT.ENABLEMENT: "RX",
+            ROOT.ATTEMPT: "RY",
+            ROOT.SUCCESS: "RZ",
+            ROOT.FAILURE: "R10",
+            ROOT.ANALYSIS: "R11",
+            ROOT.MEMORY: "R12",
+            ROOT.LEARNING: "R13",
+            ROOT.TEACHING: "R14",
+            ROOT.DECISION: "R15",
+            ROOT.BELIEF: "R16",
+            ROOT.STATE: "R17",
+            ROOT.PROPERTY: "R18",
+            ROOT.QUANTITY: "R19",
+            ROOT.TIME_RELATION: "R1A",
+            ROOT.LOCATION_STATE: "R1B",
+            ROOT.EXPERIENCE: "R1C",
+            ROOT.ASSISTANCE: "R1D",
+            ROOT.TRAVEL: "R1E",
+            ROOT.CAUSE_EFFECT: "R1F",
+            ROOT.ACTION: "R1G",
+            ROOT.CONSUMPTION: "R1H",
+            ROOT.REFUSAL: "R1I",
         }
         
         # Operator mappings (O + single character)
@@ -66,13 +109,24 @@ class CompactCSCSerializer:
         # Role mappings (single letter)
         self.role_codes = {
             Role.AGENT: "A",
-            Role.PATIENT: "P", 
+            Role.PATIENT: "P",
             Role.THEME: "T",
             Role.GOAL: "G",
             Role.SOURCE: "S",
             Role.INSTRUMENT: "I",
             Role.LOCATION: "L",
-            Role.TIME: "M"  # M for tiMe (T taken by THEME)
+            Role.TIME: "M",
+            Role.EXPERIENCER: "E",
+            Role.STIMULUS: "U",
+            Role.STANDARD: "D",
+            Role.VERDICT: "V",
+            Role.RESULT: "R",
+            Role.PATH: "H",
+            Role.ATTRIBUTE: "B",
+            Role.VALUE: "W",
+            Role.COMPARISON: "C",
+            Role.CONTENT: "N",
+            Role.MANNER: "Y",
         }
         
         # META mappings (M + single character)

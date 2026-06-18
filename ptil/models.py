@@ -1,18 +1,9 @@
-"""
-Core data models for PTIL semantic encoder.
-
-This module defines the fundamental data structures used throughout the PTIL system:
-- Enums for ROOT, Operator, Role, and META components
-- Dataclasses for CSC, Entity, and LinguisticAnalysis
-"""
-
 from enum import Enum
 from dataclasses import dataclass, field
 from typing import List, Dict, Optional, Tuple, Any
 
 
 class ROOT(Enum):
-    """Semantic anchor representing the type of event or state."""
     MOTION = "MOTION"
     TRANSFER = "TRANSFER"
     COMMUNICATION = "COMMUNICATION"
@@ -24,38 +15,67 @@ class ROOT(Enum):
     POSSESSION = "POSSESSION"
     INTENTION = "INTENTION"
     EXISTENCE = "EXISTENCE"
-    # Additional semantic primitives can be added up to 800 total
+    EMOTION = "EMOTION"
+    DESIRE = "DESIRE"
+    PREFERENCE = "PREFERENCE"
+    JOY = "JOY"
+    SADNESS = "SADNESS"
+    ANGER = "ANGER"
+    FEAR = "FEAR"
+    EVALUATION = "EVALUATION"
+    COMPARISON = "COMPARISON"
+    JUDGMENT = "JUDGMENT"
+    APPROVAL = "APPROVAL"
+    CRITICISM = "CRITICISM"
+    SOCIAL = "SOCIAL"
+    COOPERATION = "COOPERATION"
+    CONFLICT = "CONFLICT"
+    AGREEMENT = "AGREEMENT"
+    PROMISE = "PROMISE"
+    THREAT = "THREAT"
+    REQUEST = "REQUEST"
+    CAUSATION = "CAUSATION"
+    PREVENTION = "PREVENTION"
+    ENABLEMENT = "ENABLEMENT"
+    ATTEMPT = "ATTEMPT"
+    SUCCESS = "SUCCESS"
+    FAILURE = "FAILURE"
+    ANALYSIS = "ANALYSIS"
+    MEMORY = "MEMORY"
+    LEARNING = "LEARNING"
+    TEACHING = "TEACHING"
+    DECISION = "DECISION"
+    BELIEF = "BELIEF"
+    STATE = "STATE"
+    PROPERTY = "PROPERTY"
+    QUANTITY = "QUANTITY"
+    TIME_RELATION = "TIME_RELATION"
+    LOCATION_STATE = "LOCATION_STATE"
+    EXPERIENCE = "EXPERIENCE"
+    ASSISTANCE = "ASSISTANCE"
+    TRAVEL = "TRAVEL"
+    CAUSE_EFFECT = "CAUSE_EFFECT"
+    ACTION = "ACTION"
+    CONSUMPTION = "CONSUMPTION"
+    REFUSAL = "REFUSAL"
 
 
 class Operator(Enum):
-    """Ordered semantic operators encoding grammar, tense, polarity, modality, and direction."""
-    
-    # Temporal operators
     PAST = "PAST"
     PRESENT = "PRESENT"
     FUTURE = "FUTURE"
-    
-    # Aspect operators
     CONTINUOUS = "CONTINUOUS"
     COMPLETED = "COMPLETED"
     HABITUAL = "HABITUAL"
-    
-    # Polarity operators
     NEGATION = "NEGATION"
     AFFIRMATION = "AFFIRMATION"
-    
-    # Modality operators
     POSSIBLE = "POSSIBLE"
     NECESSARY = "NECESSARY"
     OBLIGATORY = "OBLIGATORY"
     PERMITTED = "PERMITTED"
-    
-    # Causation operators
     CAUSATIVE = "CAUSATIVE"
     SELF_INITIATED = "SELF_INITIATED"
     FORCED = "FORCED"
-    
-    # Direction operators
     DIRECTION_IN = "DIRECTION_IN"
     DIRECTION_OUT = "DIRECTION_OUT"
     TOWARD = "TOWARD"
@@ -63,7 +83,6 @@ class Operator(Enum):
 
 
 class Role(Enum):
-    """Semantic role bindings that map entities to their functional participation."""
     AGENT = "AGENT"
     PATIENT = "PATIENT"
     THEME = "THEME"
@@ -72,10 +91,20 @@ class Role(Enum):
     INSTRUMENT = "INSTRUMENT"
     LOCATION = "LOCATION"
     TIME = "TIME"
+    EXPERIENCER = "EXPERIENCER"
+    STIMULUS = "STIMULUS"
+    STANDARD = "STANDARD"
+    VERDICT = "VERDICT"
+    RESULT = "RESULT"
+    PATH = "PATH"
+    ATTRIBUTE = "ATTRIBUTE"
+    VALUE = "VALUE"
+    COMPARISON = "COMPARISON"
+    CONTENT = "CONTENT"
+    MANNER = "MANNER"
 
 
 class META(Enum):
-    """Context modifiers capturing speech-level and epistemic information."""
     ASSERTIVE = "ASSERTIVE"
     QUESTION = "QUESTION"
     COMMAND = "COMMAND"
@@ -87,27 +116,24 @@ class META(Enum):
 
 @dataclass
 class Entity:
-    """Represents an entity with original text and normalized form."""
     text: str
     normalized: str
 
 
 @dataclass
 class LinguisticAnalysis:
-    """Results of shallow linguistic analysis."""
     tokens: List[str]
     pos_tags: List[str]
-    dependencies: List[Tuple[int, str, int]]  # (head_idx, relation, dependent_idx)
-    negation_markers: List[int]  # Token indices with negation markers
-    tense_markers: Dict[str, List[int]]  # Tense type -> token indices
-    aspect_markers: Dict[str, List[int]]  # Aspect type -> token indices
+    dependencies: List[Tuple[int, str, int]]
+    negation_markers: List[int]
+    tense_markers: Dict[str, List[int]]
+    aspect_markers: Dict[str, List[int]]
     lemmas: List[str] = field(default_factory=list)
-    doc: Optional[Any] = None  # spaCy Doc object, set by LinguisticAnalyzer
+    doc: Optional[Any] = None
 
 
 @dataclass
 class CSC:
-    """Compressed Semantic Code - structured meaning representation."""
     root: ROOT
     ops: List[Operator]
     roles: Dict[Role, Entity]
