@@ -27,7 +27,7 @@ from .metrics import MetricsCollector
 from .learning import LearnedROOTMapper
 from .rag import PTILRAG
 
-__version__ = "0.5.0"
+__version__ = "1.0.1"
 __all__ = [
     "ROOT",
     "Operator", 
