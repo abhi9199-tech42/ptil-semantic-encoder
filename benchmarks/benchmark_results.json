@@ -1,0 +1,27 @@
+{
+  "date": "2026-06-22 20:18:39",
+  "corpus_size": 15,
+  "token_reduction": {
+    "raw_tokens": 135,
+    "compact_tokens": 161,
+    "ultra_tokens": 29,
+    "compact_reduction_pct": -19.3,
+    "ultra_reduction_pct": 78.5
+  },
+  "throughput": {
+    "texts_per_sec": 12792.0,
+    "total_texts": 750,
+    "elapsed_seconds": 0.06
+  },
+  "cross_lingual": {
+    "correct": 31,
+    "total": 40,
+    "accuracy_pct": 77.5
+  },
+  "serialization_size": {
+    "raw_bytes": 657,
+    "verbose_bytes": 1493,
+    "compact_bytes": 365,
+    "ultra_bytes": 133
+  }
+}
