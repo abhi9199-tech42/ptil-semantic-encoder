@@ -1,0 +1,4 @@
+# file: C:\Users\kriti\AppData\Roaming\Python\Python313\site-packages\pymorphy3\units\by_hyphen.py
+# hypothesis_version: 6.148.8
+
+[0.7, 0.75, 0.9, 1000000.0, '-', 'ADJF', 'ADVB', 'OpencorporaTag', 'V-ey', 'V-oy', 'datv', 'gen1', 'gent', 'loc1', 'loct', 'sing', 'skip_prefixes', 'по-']

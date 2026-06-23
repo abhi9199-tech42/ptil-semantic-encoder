@@ -1,0 +1,4 @@
+# file: C:\Users\kriti\AppData\Roaming\Python\Python313\site-packages\requests\__init__.py
+# hypothesis_version: 6.148.8
+
+['.', '0', 'ConnectTimeout', 'ConnectionError', 'HAS_SNI', 'HTTPError', 'JSONDecodeError', 'PreparedRequest', 'ReadTimeout', 'Request', 'RequestException', 'Response', 'Session', 'Timeout', 'TooManyRedirects', 'URLRequired', 'codes', 'default', 'delete', 'dev', 'get', 'head', 'ignore', 'options', 'packages', 'patch', 'post', 'put', 'request', 'session', 'utils']

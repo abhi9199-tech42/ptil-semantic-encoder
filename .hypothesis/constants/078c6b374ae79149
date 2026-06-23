@@ -1,0 +1,4 @@
+# file: C:\Users\kriti\AppData\Roaming\Python\Python313\site-packages\pymorphy3\tagset.py
+# hypothesis_version: 6.148.8
+
+[100, ',', ', ', '1per', '2per', '3per', 'ADJF', 'ADJS', 'ADVB', 'Apro', 'COMP', 'CONJ', 'GNdr', 'GRND', 'INFN', 'INTJ', 'NOUN', 'NPRO', 'NUMR', 'PRCL', 'PRED', 'PREP', 'PRTF', 'PRTS', 'VERB', '_POS', '_cyr', '_cyr_grammemes_cache', '_grammemes_cache', '_grammemes_tuple', '_str', 'ablt', 'acc1', 'acc2', 'accs', 'actv', 'anim', 'datv', 'excl', 'femn', 'futr', 'gen1', 'gen2', 'gent', 'impf', 'impr', 'inan', 'incl', 'indc', 'intr', 'loc1', 'loc2', 'loct', 'masc', 'neut', 'nomn', 'opencorpora-ext', 'opencorpora-int', 'past', 'perf', 'plur', 'pres', 'pssv', 'sing', 'tran', 'voct']

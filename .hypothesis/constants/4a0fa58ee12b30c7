@@ -1,0 +1,4 @@
+# file: C:\Users\kriti\AppData\Roaming\Python\Python313\site-packages\pymorphy3\opencorpora_dict\storage.py
+# hypothesis_version: 6.148.8
+
+['  words_dawg_len', '.', '0.0', '2.4', '<H', 'H', 'OrderedDict', 'Saving...', 'compile_options', 'compiled_at', 'computing metadata..', 'format_version', 'grammemes.json', 'gramtab_formats', 'gramtab_length', 'language_code', 'meta.json', 'opencorpora-int', 'paradigm_prefixes', 'paradigms.array', 'paradigms_length', 'pymorphy2_version', 'rb', 'source', 'source_lexemes_count', 'source_links_count', 'source_revision', 'source_version', 'suffixes.json', 'suffixes_length', 'wb', 'words.dawg', 'words_dawg_length']

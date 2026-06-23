@@ -1,0 +1,4 @@
+# file: C:\Users\kriti\AppData\Roaming\Python\Python313\site-packages\anyio\_core\_tasks.py
+# hypothesis_version: 6.148.8
+
+['PosArgsT', 'T', 'T_co', 'T_startval', '__weakref__', '_cancel_scope', '_coro', '_current_task_handle', '_exception', '_finished_event', '_name', '_return_value', '_start_value']

@@ -1,0 +1,4 @@
+# file: C:\Users\kriti\OneDrive\Pre-Tokenization Intelligence Layer (PTIL)\ptil\rag.py
+# hypothesis_version: 6.148.8
+
+[100, '\\w+', 'a', 'above', 'after', 'again', 'all', 'an', 'are', 'as', 'at', 'be', 'been', 'before', 'being', 'below', 'between', 'both', 'by', 'can', 'compressed', 'compression_ratio', 'could', 'did', 'do', 'documents', 'does', 'don', 'during', 'each', 'few', 'for', 'from', 'further', 'had', 'has', 'have', 'here', 'how', 'id', 'in', 'into', 'is', 'is_match', 'just', 'keywords', 'may', 'metadata', 'might', 'more', 'most', 'no', 'nor', 'not', 'now', 'of', 'off', 'on', 'once', 'only', 'other', 'out', 'over', 'own', 'r', 'reduction_pct', 's', 'same', 'score', 'shall', 'should', 'so', 'some', 'such', 't', 'text', 'than', 'the', 'then', 'there', 'through', 'to', 'too', 'total_documents', 'total_original_bytes', 'under', 'utf-8', 'very', 'w', 'was', 'were', 'when', 'where', 'why', 'will', 'with', 'would']

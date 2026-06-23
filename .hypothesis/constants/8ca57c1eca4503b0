@@ -1,0 +1,4 @@
+# file: C:\Users\kriti\AppData\Roaming\Python\Python313\site-packages\anyio\_backends\_trio.py
+# hypothesis_version: 6.148.8
+
+[65536, ':', 'AF_UNIX', 'P', 'PosArgsT', 'T', 'T_Retval', 'T_SockAddr', 'T_co', '__original', '_fast_acquire', 'i', 'reading from', 'writing to']

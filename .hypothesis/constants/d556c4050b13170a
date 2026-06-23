@@ -1,0 +1,4 @@
+# file: C:\Users\kriti\OneDrive\Pre-Tokenization Intelligence Layer (PTIL)\ptil\roles_binder.py
+# hypothesis_version: 6.148.8
+
+['ADP', 'AUX', 'NOUN', 'PRON', 'PROPN', 'ROOT', 'Token', 'VERB', 'after', 'at', 'before', 'beside', 'by', 'compound', 'csubj', 'csubjpass', 'dobj', 'doc', 'during', 'from', 'in', 'into', 'iobj', 'near', 'nmod', 'nsubj', 'nsubjpass', 'off', 'on', 'out', 'over', 'pobj', 'poss', 'to', 'toward', 'towards', 'under', 'using', 'while', 'with']

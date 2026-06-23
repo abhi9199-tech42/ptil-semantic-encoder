@@ -567,4 +567,13 @@ pytest tests/ -v
 
 ## License
 
-MIT
+**Free for personal use.** MIT License.
+
+For enterprise use (commercial deployment, custom features, priority support, SLA):
+
+📧 **Contact:** [your email here]
+🐦 **Twitter/X:** [your handle here]
+
+---
+
+## Testing
