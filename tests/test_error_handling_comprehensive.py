@@ -112,15 +112,12 @@ class TestCSCGeneratorErrorHandling:
     def test_missing_root_generation(self):
         """Test generation when ROOT is missing (should raise or handle)."""
         generator = CSCGenerator()
-        # This might be intended to fail if ROOT is mandatory in constructor
-        # We check if it handles None gracefully or enforces type integrity
         try:
-            # If the design strictly enforces ROOT, this might fail or require a dummy ROOT
-            # Assuming 'None' might trigger a validation error
             csc = CSC(root=None, ops=[], roles={})
-            # If dataclass allows None but logic doesn't, we check validate
-        except Exception:
-            pass # Type error is acceptable if strictly typed
+            result = generator.generate_csc(csc.root, csc.ops, csc.roles, csc.meta)
+            assert result is None or result.root is None, "Should handle None ROOT gracefully"
+        except (ValueError, TypeError):
+            pass
 
 class TestPTILEncoderResilience:
     """Test high-level resilience of the encoder."""
@@ -129,14 +126,13 @@ class TestPTILEncoderResilience:
         """If one component fails, does the pipeline crash or degrade?"""
         encoder = PTILEncoder()
         
-        # Mocking a component to raise an exception
-        # This requires the encoder to not catch internal errors blindly, 
-        # but we want to see if it handles known bad states.
-        # Instead of mocking, we feed input that triggers known edge cases.
-        
-        # Input that causes tokenizer to produce empty tokens but non-empty text?
-        # Hard to force without internal mocking, so we rely on system boundaries.
-        pass
+        original = encoder.root_mapper.map_predicate
+        encoder.root_mapper.map_predicate = lambda *a, **k: (_ for _ in ()).throw(RuntimeError("boom"))
+        try:
+            cscs = encoder.encode("The boy runs")
+            assert isinstance(cscs, list)
+        finally:
+            encoder.root_mapper.map_predicate = original
 
     def test_extreme_recursion_depth(self):
         """Test highly nested sentence structures."""
@@ -148,6 +144,8 @@ class TestPTILEncoderResilience:
             assert len(cscs) > 0
         except RecursionError:
             pytest.fail("Encoder crashed on recursion depth")
+        except Exception as e:
+            pytest.fail(f"Encoder failed on deeply nested text with {type(e).__name__}: {e}")
 
     def test_conflicting_unicode_directionality(self):
         """Test BIDI text attacks."""

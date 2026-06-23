@@ -59,6 +59,17 @@ class ROOTClassifier:
 
     @classmethod
     def load(cls, path: str) -> "ROOTClassifier":
+        import hashlib
+        sha_path = path + ".sha256"
+        try:
+            with open(sha_path, "r") as f:
+                expected_hash = f.read().strip()
+            with open(path, "rb") as f:
+                actual_hash = hashlib.sha256(f.read()).hexdigest()
+            if actual_hash != expected_hash:
+                raise ValueError(f"Model integrity check failed for {path}")
+        except FileNotFoundError:
+            pass
         with open(path, "rb") as f:
             data = pickle.load(f)
         obj = cls(data["root_names"])

@@ -139,18 +139,19 @@ class TestLinguisticAnalyzerEdgeCases:
         """Test various negation patterns."""
         test_cases = [
             ("I do not like this", [2]),  # "not"
-            ("I don't like this", [1]),   # "don't" 
+            ("I don't like this", [2]),   # "n't" at position 2 after tokenization
             ("I never go there", [1]),    # "never"
             ("Nobody came", [0]),         # "nobody"
             ("Nothing happened", [0]),    # "nothing"
-            ("I can't do it", [1]),       # "can't"
-            ("He won't come", [1]),       # "won't"
+            ("I can't do it", [2]),       # "n't" at position 2
+            ("He won't come", [2]),       # "n't" at position 2
         ]
         
         for text, expected_positions in test_cases:
             analysis = self.analyzer.analyze(text)
-            # Check that negation was detected (positions may vary due to tokenization)
             assert len(analysis.negation_markers) > 0, f"No negation detected in: {text}"
+            matched = set(expected_positions) & set(analysis.negation_markers)
+            assert len(matched) > 0, f"Expected negation near {expected_positions}, got {analysis.negation_markers} in: {text}"
     
     def test_tense_marker_detection(self):
         """Test tense marker detection."""

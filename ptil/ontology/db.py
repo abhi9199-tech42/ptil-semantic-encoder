@@ -1,6 +1,7 @@
 import sqlite3
 import os
 import logging
+import threading
 from typing import Dict, List, Optional, Set, Tuple
 
 logger = logging.getLogger(__name__)
@@ -15,12 +16,14 @@ def get_db_path() -> str:
 
 class OntologyDB:
     _instance = None
+    _lock = threading.Lock()
 
     def __new__(cls, db_path: Optional[str] = None):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-            cls._instance._initialized = False
-        return cls._instance
+        with cls._lock:
+            if cls._instance is None:
+                cls._instance = super().__new__(cls)
+                cls._instance._initialized = False
+            return cls._instance
 
     def __init__(self, db_path: Optional[str] = None):
         if self._initialized:
@@ -35,7 +38,7 @@ class OntologyDB:
 
     def connect(self) -> sqlite3.Connection:
         if self._conn is None:
-            self._conn = sqlite3.connect(self.db_path)
+            self._conn = sqlite3.connect(self.db_path, check_same_thread=False)
             self._conn.row_factory = sqlite3.Row
         return self._conn
 

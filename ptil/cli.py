@@ -158,8 +158,11 @@ def cmd_benchmark(args: argparse.Namespace):
     print()
     print("---")
     print("Total: %d texts, %d tokens, %d CSCs" % (len(texts), total_tokens, total_cscs))
-    print("Time:  %.0fms (%.0fms avg)" % (total_elapsed * 1000, total_elapsed / len(texts) * 1000))
-    print("Rate:  %.0f tokens/sec" % (total_tokens / total_elapsed))
+    if texts:
+        print("Time:  %.0fms (%.0fms avg)" % (total_elapsed * 1000, total_elapsed / len(texts) * 1000))
+        print("Rate:  %.0f tokens/sec" % (total_tokens / total_elapsed))
+    else:
+        print("No texts to benchmark.")
 
 
 def cmd_cache(args: argparse.Namespace):

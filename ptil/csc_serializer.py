@@ -76,7 +76,7 @@ class CSCSerializer:
         for csc in csc_list:
             serialized_cscs.append(self.serialize(csc))
         
-        return " ".join(serialized_cscs)
+        return "; ".join(serialized_cscs)
     
     def validate_serialization_format(self, serialized: str) -> bool:
         """

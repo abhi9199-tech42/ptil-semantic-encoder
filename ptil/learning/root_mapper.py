@@ -100,7 +100,11 @@ class LearnedROOTMapper:
         return self._db.is_predicate_known(predicate)
 
     def get_all_predicates_for_root(self, root: ROOT) -> List[str]:
-        return []
+        cur = self._db.connect().execute(
+            "SELECT predicate FROM predicates WHERE root_id = (SELECT id FROM roots WHERE name = ?) ORDER BY predicate",
+            (root.name,)
+        )
+        return [row["predicate"] for row in cur.fetchall()]
 
     def is_trained(self) -> bool:
         return self._classifier is not None

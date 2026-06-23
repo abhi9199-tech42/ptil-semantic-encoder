@@ -147,7 +147,7 @@ class UltraCompactCSCSerializer:
         self.code_to_root = {v: k for k, v in self.root_codes.items()}
         self.code_to_operator = {v: k for k, v in self.operator_codes.items()}
         self.code_to_role = {v: k for k, v in self.role_codes.items()}
-        self.code_to_meta = {v: k for k, v in self.meta_codes.items() if v}  # Skip empty
+        self.code_to_meta = {v: k for k, v in self.meta_codes.items() if v}  # Skip empty ASSERTIVE
     
     def _build_entity_dictionary(self) -> Dict[str, str]:
         """Build ultra-compact entity dictionary."""

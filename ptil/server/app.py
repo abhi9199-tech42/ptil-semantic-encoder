@@ -3,9 +3,10 @@ PTIL REST API server — FastAPI-based HTTP interface for semantic encoding.
 """
 
 from typing import List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import PlainTextResponse
 
 from ..encoder import PTILEncoder
 from ..config import PTILConfig
@@ -14,12 +15,12 @@ from ..metrics import MetricsCollector
 
 
 class EncodeRequest(BaseModel):
-    text: str
+    text: str = Field(..., max_length=10000)
     format: str = "verbose"
 
 
 class EncodeBatchRequest(BaseModel):
-    texts: List[str]
+    texts: List[str] = Field(..., max_length=100)
     format: str = "verbose"
 
 
@@ -71,8 +72,8 @@ def create_app(config: Optional[PTILConfig] = None) -> FastAPI:
 
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],
-        allow_methods=["*"],
+        allow_origins=cfg.allowed_origins if hasattr(cfg, 'allowed_origins') and cfg.allowed_origins else ["http://localhost:8000"],
+        allow_methods=["GET", "POST"],
         allow_headers=["*"],
     )
 
@@ -190,7 +191,7 @@ def create_app(config: Optional[PTILConfig] = None) -> FastAPI:
             lines.append(f'# HELP ptil_{name} Counter for {name}')
             lines.append(f'# TYPE ptil_{name} counter')
             lines.append(f'ptil_{name} {count}')
-        return {"Content-Type": "text/plain; charset=utf-8"}, "\n".join(lines)
+        return PlainTextResponse("\n".join(lines))
 
     @app.get("/cache/stats", tags=["system"])
     async def cache_stats():

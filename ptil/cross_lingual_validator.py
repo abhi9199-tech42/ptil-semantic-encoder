@@ -323,8 +323,7 @@ class CrossLingualValidator:
                 # Basic entity comparison (could be enhanced)
                 if hasattr(entity1, 'normalized') and hasattr(entity2, 'normalized'):
                     if entity1.normalized.lower() != entity2.normalized.lower():
-                        # Allow for minor variations in entity normalization
-                        continue
+                        return False
         
         return True
     

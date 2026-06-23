@@ -227,9 +227,7 @@ class TestCrossLingualConsistencyProperties:
                             # The exact ROOT might vary based on implementation
                             # Include all ROOTs that are semantically similar to MOTION
                             motion_related = {
-                                ROOT.MOTION, ROOT.TRANSFER, ROOT.TRAVEL, ROOT.CHANGE,
-                                ROOT.CAUSE_EFFECT, ROOT.ACTION, ROOT.CREATION, ROOT.DESTRUCTION,
-                                ROOT.EXISTENCE, ROOT.POSSESSION, ROOT.INTENTION
+                                ROOT.MOTION, ROOT.TRAVEL, ROOT.ACTION, ROOT.TRANSFER
                             }
                             assert root1 in motion_related
                             assert root2 in motion_related

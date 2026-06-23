@@ -56,5 +56,10 @@ def build_dataset(feature_extractor: FeatureExtractor,
 def train_dev_split(features: np.ndarray, labels: np.ndarray,
                     test_ratio: float = 0.2, seed: int = 42):
     from sklearn.model_selection import train_test_split
+    from collections import Counter
+    min_count = min(Counter(labels).values()) if len(labels) > 0 else 0
+    if min_count < 2:
+        return train_test_split(features, labels, test_size=test_ratio,
+                                random_state=seed)
     return train_test_split(features, labels, test_size=test_ratio,
                             random_state=seed, stratify=labels)

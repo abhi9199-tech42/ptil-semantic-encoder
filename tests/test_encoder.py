@@ -80,8 +80,7 @@ class TestEncoderIntegration:
         
         # META might contain QUESTION marker
         if csc.meta:
-            # If META is detected, it might be QUESTION
-            pass  # META detection is optional and may vary
+            assert csc.meta is not None, "META should be detected for questions"
         
         # Verify serialization
         serialized = self.encoder.encode_and_serialize(text)

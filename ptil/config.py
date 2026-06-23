@@ -30,8 +30,13 @@ class PTILConfig:
 
     @classmethod
     def from_json(cls, path: str) -> "PTILConfig":
-        with open(path) as f:
-            return cls.from_dict(json.load(f))
+        try:
+            with open(path) as f:
+                return cls.from_dict(json.load(f))
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Config file not found: {path}")
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid JSON in config file: {e}")
 
     @classmethod
     def from_env(cls) -> "PTILConfig":
@@ -44,9 +49,9 @@ class PTILConfig:
                 field_info = cls.__dataclass_fields__[key]
                 field_type = field_info.type
                 try:
-                    if field_type is bool:
+                    if field_type is bool or (isinstance(field_type, str) and 'bool' in field_type.lower()):
                         val = val.lower() in ("1", "true", "yes")
-                    elif field_type is int:
+                    elif field_type is int or (isinstance(field_type, str) and 'int' in field_type.lower()):
                         val = int(val)
                 except (ValueError, TypeError):
                     continue

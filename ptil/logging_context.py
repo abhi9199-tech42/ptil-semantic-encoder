@@ -1,13 +1,14 @@
 import logging
 import uuid
 import json
-import threading
+import hashlib
+import contextvars
 from dataclasses import dataclass, field, asdict
 from typing import Optional, Dict, Any
 from datetime import datetime, timezone
 
 
-_context = threading.local()
+_context: contextvars.ContextVar[Optional["PTILContext"]] = contextvars.ContextVar('_context', default=None)
 
 
 @dataclass
@@ -24,7 +25,7 @@ class PTILContext:
             request_id=uuid.uuid4().hex[:12],
             timestamp=datetime.now(timezone.utc).isoformat(),
             language=language,
-            input_hash=str(hash(input_text)) if input_text else "",
+            input_hash=hashlib.md5(input_text.encode()).hexdigest()[:12] if input_text else "",
             component=component,
         )
 
@@ -34,11 +35,11 @@ class PTILContext:
 
 
 def get_context() -> Optional[PTILContext]:
-    return getattr(_context, "ctx", None)
+    return _context.get()
 
 
 def set_context(ctx: Optional[PTILContext]):
-    _context.ctx = ctx
+    _context.set(ctx)
 
 
 class PTILogger:

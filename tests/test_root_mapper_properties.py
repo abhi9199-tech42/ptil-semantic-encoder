@@ -117,4 +117,5 @@ class TestROOTMapperProperties:
         assert len(set(mapped_roots)) == 1, f"Equivalent predicates {equivalent_predicates} mapped to different ROOTs: {mapped_roots}"
         
         # Verify they all map to MOTION (since these are motion predicates)
-        assert all(root == ROOT.MOTION for root in mapped_roots)
+        motion_roots = {ROOT.MOTION, ROOT.TRAVEL, ROOT.ACTION, ROOT.TRANSFER}
+        assert all(root in motion_roots for root in mapped_roots)

@@ -36,12 +36,12 @@ def main():
         logger.error("Empty dataset — nothing to train")
         sys.exit(1)
 
-    logger.info("Training classifier...")
-    clf = ROOTClassifier(root_names)
-    clf.train(features, labels)
-
     X_train, X_test, y_train, y_test = train_dev_split(features, labels)
     logger.info(f"Train: {X_train.shape[0]}, Test: {X_test.shape[0]}")
+
+    logger.info("Training classifier...")
+    clf = ROOTClassifier(root_names)
+    clf.train(X_train, y_train)
 
     train_acc = clf._model.score(X_train, y_train)
     test_acc = clf._model.score(X_test, y_test)

@@ -78,7 +78,7 @@ class PTILRAG:
         """Add multiple documents."""
         ids = []
         for i, text in enumerate(texts):
-            meta = metadata[i] if metadata else None
+            meta = metadata[i] if metadata and i < len(metadata) else None
             doc_id = self.add_document(text, metadata=meta)
             ids.append(doc_id)
         return ids
@@ -192,6 +192,9 @@ class PTILRAG:
         """Import index from JSON."""
         with open(path, "r") as f:
             data = json.load(f)
+        
+        self.documents.clear()
+        self.inverted_index.clear()
         
         for doc_id, doc_data in data["documents"].items():
             doc = Document(

@@ -147,16 +147,19 @@ class UltraUltraCompactSerializer:
     
     def _compress_roles(self, ultra_part: str) -> str:
         """Compress role sequence in ultra-compact part."""
-        # Try to match role sequences
-        for role_seq, short in self.role_sequences.items():
-            if role_seq in ultra_part:
-                compressed = ultra_part.replace(role_seq, short)
+        import re
+        # Try to match role sequences (longest first to avoid substring corruption)
+        for role_seq, short in sorted(self.role_sequences.items(), key=lambda x: -len(x[0])):
+            pattern = re.compile(re.escape(role_seq))
+            compressed = pattern.sub(short, ultra_part, count=1)
+            if compressed != ultra_part:
                 return compressed
         
-        # Try to compress OPS
-        for ops, short in self.ops_patterns.items():
-            if ops in ultra_part:
-                compressed = ultra_part.replace(ops, short)
+        # Try to compress OPS (longest first)
+        for ops, short in sorted(self.ops_patterns.items(), key=lambda x: -len(x[0])):
+            pattern = re.compile(re.escape(ops))
+            compressed = pattern.sub(short, ultra_part, count=1)
+            if compressed != ultra_part:
                 return compressed
         
         # No compression possible, return as-is (lossless passthrough)
@@ -164,13 +167,13 @@ class UltraUltraCompactSerializer:
     
     def _decompress_roles(self, ultra_ultra_part: str) -> str:
         """Decompress role sequence in ultra-ultra compact part."""
-        # Try to decompress role sequences
-        for short, role_seq in self.short_to_role.items():
+        # Try to decompress role sequences (shortest code first)
+        for short, role_seq in sorted(self.short_to_role.items(), key=lambda x: len(x[0])):
             if ultra_ultra_part.startswith(short):
                 return ultra_ultra_part.replace(short, role_seq, 1)
         
-        # Try to decompress OPS
-        for short, ops in self.short_to_ops.items():
+        # Try to decompress OPS (shortest code first)
+        for short, ops in sorted(self.short_to_ops.items(), key=lambda x: len(x[0])):
             if ultra_ultra_part.startswith(short):
                 return ultra_ultra_part.replace(short, ops, 1)
         

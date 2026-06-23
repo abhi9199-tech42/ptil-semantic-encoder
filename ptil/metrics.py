@@ -22,16 +22,18 @@ class MetricsCollector:
     _lock = threading.Lock()
 
     def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-            cls._instance._initialized = False
-        return cls._instance
+        with cls._lock:
+            if cls._instance is None:
+                cls._instance = super().__new__(cls)
+                cls._instance._initialized = False
+            return cls._instance
 
     def __init__(self):
         if self._initialized:
             return
         self._initialized = True
         self._reset()
+        self._data_lock = threading.Lock()
 
     def _reset(self):
         self._timings: Dict[str, MetricValue] = defaultdict(MetricValue)
@@ -39,17 +41,20 @@ class MetricsCollector:
         self._gauge: Dict[str, float] = {}
 
     def record_timing(self, name: str, duration: float):
-        mv = self._timings[name]
-        mv.count += 1
-        mv.total_time += duration
-        mv.min_time = min(mv.min_time, duration)
-        mv.max_time = max(mv.max_time, duration)
+        with self._data_lock:
+            mv = self._timings[name]
+            mv.count += 1
+            mv.total_time += duration
+            mv.min_time = min(mv.min_time, duration)
+            mv.max_time = max(mv.max_time, duration)
 
     def increment(self, name: str, value: int = 1):
-        self._counters[name] += value
+        with self._data_lock:
+            self._counters[name] += value
 
     def set_gauge(self, name: str, value: float):
-        self._gauge[name] = value
+        with self._data_lock:
+            self._gauge[name] = value
 
     def get_timing(self, name: str) -> Optional[MetricValue]:
         return self._timings.get(name)

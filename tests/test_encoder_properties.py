@@ -99,20 +99,20 @@ class TestEncoderProperties:
         
         # Test that the same predicate in different contexts may map to different ROOTs
         # This validates that disambiguation is actually working
-        if predicate == "run":
-            # "run" as verb (MOTION) vs "run" as noun (different ROOT)
-            verb_sentence = "The athlete will run fast"
-            noun_sentence = "The run was exhausting"
+        for pred in ["run", "bank", "light", "book", "play"]:
+            verb_sentence = f"The athlete will {pred} fast"
+            noun_sentence = f"The {pred} was exhausting"
             
             verb_cscs = self.encoder.encode(verb_sentence)
             noun_cscs = self.encoder.encode(noun_sentence)
             
-            # Both should produce valid CSCs
-            assert len(verb_cscs) > 0 and len(noun_cscs) > 0
+            assert len(verb_cscs) > 0 and len(noun_cscs) > 0, (
+                f"No CSCs generated for predicate '{pred}'"
+            )
             
             # The disambiguation should be consistent within each context
             verb_cscs_2 = self.encoder.encode(verb_sentence)
             noun_cscs_2 = self.encoder.encode(noun_sentence)
             
-            assert verb_cscs == verb_cscs_2, "Verb context disambiguation not consistent"
-            assert noun_cscs == noun_cscs_2, "Noun context disambiguation not consistent"
+            assert verb_cscs == verb_cscs_2, f"Verb context disambiguation not consistent for '{pred}'"
+            assert noun_cscs == noun_cscs_2, f"Noun context disambiguation not consistent for '{pred}'"

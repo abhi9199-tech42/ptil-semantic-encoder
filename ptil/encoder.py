@@ -144,7 +144,14 @@ class PTILEncoder:
             return ""
 
     def encode_and_serialize_batch(self, texts: List[str], format: str = "verbose") -> List[str]:
-        return [self.encode_and_serialize(t, format) for t in texts]
+        results = []
+        for t in texts:
+            try:
+                results.append(self.encode_and_serialize(t, format))
+            except Exception as e:
+                self.logger.error(f"Batch serialization failed for item", error=str(e))
+                results.append("")
+        return results
 
     def encode_for_training(self, text: str, config: Optional[TrainingConfig] = None) -> str:
         if config is None:

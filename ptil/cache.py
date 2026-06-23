@@ -29,7 +29,7 @@ class LRUCache:
     def set(self, key: str, value: Any, ttl: Optional[int] = None):
         if len(self._cache) >= self._capacity:
             self._cache.popitem(last=False)
-        self._cache[key] = CacheEntry(value, time.time() + (ttl or self._ttl))
+        self._cache[key] = CacheEntry(value, time.time() + (ttl if ttl is not None else self._ttl))
         self._cache.move_to_end(key)
 
     def invalidate(self, key: str):
