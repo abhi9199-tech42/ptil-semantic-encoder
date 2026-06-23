@@ -204,6 +204,6 @@ class UltraUltraCompactSerializer:
         return {
             "ultra_length": len(ultra_compact),
             "ultra_ultra_length": len(ultra_ultra),
-            "compression_ratio": len(ultra_compact) / len(ultra_ultra) if ultra_ultra else 0,
+            "compression_ratio": len(ultra_ultra) / len(ultra_compact) if ultra_compact else 0,
             "bytes_saved": len(ultra_compact) - len(ultra_ultra),
         }

@@ -1,4 +1,0 @@
-# file: C:\Users\kriti\AppData\Roaming\Python\Python313\site-packages\pymorphy3\opencorpora_dict\compile.py
-# hypothesis_version: 6.148.8
-
-[10000, '%20s %15s %15s %15s', ',', '21', '23', '27', '7', 'CompiledDictionary', 'H', 'building paradigms', 'building word DAFSA', 'len(gramtab)', 'len(paradigms)', 'len(words)', 'max_suffix_length', 'min_ending_freq', 'paradigm_prefixes', 'total:', 'word']

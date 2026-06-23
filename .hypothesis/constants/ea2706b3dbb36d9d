@@ -1,4 +1,0 @@
-# file: C:\Users\kriti\OneDrive\Pre-Tokenization Intelligence Layer (PTIL)\ptil\metrics.py
-# hypothesis_version: 6.148.8
-
-[0.0, 1000, 'avg_ms', 'count', 'counters', 'gauges', 'inf', 'max_ms', 'min_ms', 'timings']

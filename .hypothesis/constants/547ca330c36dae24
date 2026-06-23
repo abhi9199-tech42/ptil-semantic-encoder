@@ -1,4 +1,0 @@
-# file: C:\Users\kriti\AppData\Roaming\Python\Python313\site-packages\sklearn\exceptions.py
-# hypothesis_version: 6.148.8
-
-['ConvergenceWarning', 'EfficiencyWarning', 'FitFailedWarning', 'Not expected to fail', 'NotFittedError', 'SkipTestWarning']

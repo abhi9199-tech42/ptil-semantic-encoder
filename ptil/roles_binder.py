@@ -54,10 +54,6 @@ class ROLESBinder:
             if token.pos_ == "VERB":
                 return token
 
-        for token in doc:
-            if token.dep_ == "ROOT" and token.pos_ in ["NOUN", "PROPN"]:
-                return token
-
         return None
 
     def _bind_subject_to_agent(self, doc, main_verb: 'Token',

@@ -117,10 +117,10 @@ class PTILRAG:
         
         doc_ids = list(self.documents.keys())
         matched_id = results[0]["id"]
-        if matched_id not in doc_ids:
+        try:
+            matched_idx = doc_ids.index(matched_id)
+        except ValueError:
             return results
-        
-        matched_idx = doc_ids.index(matched_id)
         
         start = max(0, matched_idx - context_window)
         end = min(len(doc_ids), matched_idx + context_window + 1)

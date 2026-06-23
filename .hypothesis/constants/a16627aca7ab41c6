@@ -1,4 +1,0 @@
-# file: C:\Users\kriti\OneDrive\Pre-Tokenization Intelligence Layer (PTIL)\ptil\tokenizer_backends.py
-# hypothesis_version: 6.148.8
-
-['bpe', 'cl100k_base', 'gpt2', 'unigram', 'wordpiece']

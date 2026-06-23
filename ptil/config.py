@@ -60,6 +60,14 @@ class PTILConfig:
         env_config = PTILConfig.from_env()
         merged = self.to_dict()
         defaults = PTILConfig().__dict__
-        merged.update({k: v for k, v in env_config.to_dict().items()
-                       if v is not None and v != defaults.get(k)})
+        for k, v in env_config.to_dict().items():
+            if v is None:
+                continue
+            default_v = defaults.get(k)
+            if isinstance(default_v, (list, dict, set)):
+                if v != default_v:
+                    merged[k] = v
+            else:
+                if v != default_v:
+                    merged[k] = v
         return PTILConfig.from_dict(merged)

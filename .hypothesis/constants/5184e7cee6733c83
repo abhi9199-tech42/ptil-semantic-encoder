@@ -1,4 +1,0 @@
-# file: C:\Users\kriti\AppData\Roaming\Python\Python313\site-packages\pandas\_libs\__init__.py
-# hypothesis_version: 6.148.8
-
-['Interval', 'NaT', 'NaTType', 'OutOfBoundsDatetime', 'Period', 'Timedelta', 'Timestamp', 'iNaT']

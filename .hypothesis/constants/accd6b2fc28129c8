@@ -1,4 +1,0 @@
-# file: C:\Users\kriti\OneDrive\Pre-Tokenization Intelligence Layer (PTIL)\ptil\learning\train.py
-# hypothesis_version: 6.148.8
-
-[0.5, '--min-weight', '--output', '--spacy-model', '--verbose', '-o', 'Done.', 'Output model path', '__main__', 'en_core_web_md', 'store_true']

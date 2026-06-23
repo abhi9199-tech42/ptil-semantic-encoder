@@ -8,3 +8,7 @@ build/
 .mypy_cache/
 *.db
 !ptil/ontology/ptil.db
+.hypothesis/
+efficiency_report.txt
+test_output.log
+validation_report.txt

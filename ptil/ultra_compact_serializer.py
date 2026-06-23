@@ -552,7 +552,7 @@ Target: 80%+ token reduction through maximum compression.
             return False
         
         # Should start with ROOT code
-        valid_starts = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-+[]{}<>"
+        valid_starts = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-+[]{}"
         if serialized[0] not in valid_starts:
             return False
         

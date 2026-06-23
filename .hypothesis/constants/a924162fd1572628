@@ -1,4 +1,0 @@
-# file: C:\Users\kriti\AppData\Roaming\Python\Python313\site-packages\spacy\lang\es\punctuation.py
-# hypothesis_version: 6.148.8
-
-['%', '%²\\-\\+', '(?<=[0-9])(?:{c})', '(?<=[0-9])(?:{u})', '(?<=[0-9])\\+', '(?<=[{au}][{au}])\\.', '(?<=[{a}]),(?=[{a}])', '(?<=°[FfCcKk])\\.', '–', '—', '—–']

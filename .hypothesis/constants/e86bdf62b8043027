@@ -1,4 +1,0 @@
-# file: C:\Users\kriti\AppData\Roaming\Python\Python313\site-packages\scipy\sparse\linalg\_dsolve\__init__.py
-# hypothesis_version: 6.148.8
-
-['MatrixRankWarning', 'SuperLU', 'factorized', 'is_sptriangular', 'spbandwidth', 'spilu', 'splu', 'spsolve', 'spsolve_triangular', 'use_solver']

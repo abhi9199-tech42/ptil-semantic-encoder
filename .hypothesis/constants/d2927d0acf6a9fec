@@ -1,4 +1,0 @@
-# file: C:\Users\kriti\OneDrive\Pre-Tokenization Intelligence Layer (PTIL)\ptil\config.py
-# hypothesis_version: 6.148.8
-
-[512, 3600, 8000, '1', 'INFO', 'PTILConfig', 'PTIL_', 'X-Request-ID', 'en', 'en_core_web_sm', 'true', 'vector_fallback', 'verbose', 'yes']

@@ -1,8 +1,12 @@
-MIT License
+PTIL License — Free for Personal Use
 
 Copyright (c) 2026 Pre-Tokenization Intelligence Layer Contributors
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
+---
+
+## PERSONAL USE — FREE (MIT License)
+
+Permission is hereby granted, free of charge, to any individual obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -11,6 +15,52 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
+"Personal use" means non-commercial use by an individual for personal projects,
+learning, experimentation, or hobby purposes. No revenue, no employees, no
+business purpose.
+
+---
+
+## COMMERCIAL / BUSINESS USE — SUBSCRIPTION REQUIRED
+
+Any use of this software for commercial, business, or revenue-generating purposes
+requires a valid PTIL Business License subscription.
+
+"Business use" includes but is not limited to:
+
+- Use within a company, organization, or business entity
+- Use that generates revenue (directly or indirectly)
+- Use in production systems serving customers
+- Use by employees, contractors, or agents acting on behalf of a business
+- Use in SaaS products, APIs, or commercial software
+- Use in internal business tools or workflows
+
+To obtain a Business License, contact: [YOUR EMAIL HERE]
+
+Pricing and terms available at: [YOUR WEBSITE HERE]
+
+---
+
+## ENTERPRISE USE
+
+For enterprise deployments, custom features, priority support, or SLA agreements,
+contact us directly for custom pricing.
+
+---
+
+## WHAT IS NOT ALLOWED
+
+Without a Business License, you may NOT:
+
+- Use this software in any revenue-generating capacity
+- Redistribute this software as part of a commercial product
+- Offer this software as a managed service to businesses
+- Remove or alter this license notice
+
+---
+
+## DISCLAIMER
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,

@@ -1,4 +1,0 @@
-# file: C:\Users\kriti\OneDrive\Pre-Tokenization Intelligence Layer (PTIL)\ptil\roles_binder.py
-# hypothesis_version: 6.148.8
-
-['ADJ', 'ADP', 'AUX', 'NOUN', 'PRON', 'PROPN', 'ROOT', 'Token', 'VERB', 'after', 'at', 'autumn', 'before', 'beside', 'by', 'compound', 'csubj', 'csubjpass', 'day', 'dobj', 'doc', 'during', 'evening', 'friday', 'from', 'hour', 'in', 'into', 'iobj', 'later', 'monday', 'month', 'morning', 'near', 'night', 'nmod', 'now', 'nsubj', 'nsubjpass', 'off', 'on', 'out', 'over', 'pobj', 'poss', 'quarter', 'saturday', 'soon', 'spring', 'summer', 'sunday', 'thursday', 'to', 'today', 'tomorrow', 'toward', 'towards', 'tuesday', 'under', 'using', 'wednesday', 'week', 'weekend', 'while', 'winter', 'with', 'year', 'yesterday']

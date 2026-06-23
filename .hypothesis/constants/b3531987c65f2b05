@@ -1,4 +1,0 @@
-# file: C:\Users\kriti\AppData\Roaming\Python\Python313\site-packages\spacy\lang\es\lemmatizer.py
-# hypothesis_version: 6.148.8
-
-['$', '(\\.)([0-9]{3})$', ',', '.', 'Number=Plur', 'PronType=Prs', '\\.', 'accents', 'adp', 'adverbs', 'aux', 'cconj', 'det', 'det_and_pron_fixed', 'det_and_pron_general', 'eol', 'intj', 'lemma_exc', 'lemma_index', 'lemma_rules', 'lemma_rules_groups', 'lemmatize_', 'n', 'num', 'part', 'pron', 'propn', 'punct', 'rule', 's', 'sconj', 'space', 'sym', 'verb', 'voc_alt_1', 'voc_alt_2', 'x']

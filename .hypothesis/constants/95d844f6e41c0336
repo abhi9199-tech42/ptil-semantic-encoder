@@ -1,4 +1,0 @@
-# file: C:\Users\kriti\OneDrive\Pre-Tokenization Intelligence Layer (PTIL)\ptil\learning\features.py
-# hypothesis_version: 6.148.8
-
-[1.0, 'CC', 'DT', 'IN', 'JJ', 'JJR', 'JJS', 'MD', 'NN', 'NNP', 'NNPS', 'NNS', 'PRP', 'PRP$', 'RB', 'RBR', 'RBS', 'TO', 'UNKNOWN', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'WDT', '_', 'advmod', 'amod', 'aux', 'dobj', 'en_core_web_md', 'iobj', 'neg', 'nsubj', 'pobj', 'prep']

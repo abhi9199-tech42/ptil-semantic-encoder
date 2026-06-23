@@ -71,7 +71,18 @@ class CrossLingualValidator:
             "role_consistency": {}
         }
         
-        for i, (text1, lang1, text2, lang2) in enumerate(text_pairs):
+        for i, pair in enumerate(text_pairs):
+            if len(pair) == 3:
+                text1, lang1, text2 = pair
+                lang2 = lang1
+            elif len(pair) == 4:
+                text1, lang1, text2, lang2 = pair
+            else:
+                results["detailed_results"].append({
+                    "pair_index": i, "error": f"Expected 3 or 4 elements, got {len(pair)}"
+                })
+                results["inconsistent_pairs"] += 1
+                continue
             try:
                 # Get encoders for both languages
                 encoder1 = self.get_encoder_for_language(lang1)

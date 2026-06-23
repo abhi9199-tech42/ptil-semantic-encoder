@@ -1,4 +1,0 @@
-# file: C:\Users\kriti\AppData\Roaming\Python\Python313\site-packages\spacy\lang\es\tokenizer_exceptions.py
-# hypothesis_version: 6.148.8
-
-['12', '12m.', 'Av.', 'Avda.', 'Cía.', 'Dr.', 'Dra.', 'EE. UU.', 'EE.UU.', 'Ee. Uu.', 'Ee.Uu.', 'Gob.', 'Gral.', 'Ing.', 'J.C.', 'Lic.', 'P.D.', 'Prof.', 'Profa.', 'Q.E.P.D.', 'S.A.', 'S.L.', 'S.R.L.', 'Sr.', 'Sra.', 'Srta.', 'Ud.', 'Uds.', 'Vd.', 'Vds.', 'a.C.', 'a.J.C.', 'a.m.', 'am', 'apdo.', 'aprox.', 'd.C.', 'd.J.C.', 'dna.', 'dpto.', 'ej.', 'el', 'esq.', 'etc.', 'fig.', 'km/h', 'l', 'm.', 'm.n.', 'n°', 'núm.', 'p.ej.', 'p.m.', 'pa', 'pal', 'pm', 'pág.', 'q.e.p.d.', 's.s.s.', 'usted', 'ustedes', 'vol.', 'volúmen', '°C']
