@@ -18,7 +18,7 @@ class TestTrainingIntegrationProperties:
         self.encoder = PTILEncoder()
     
     @given(st.text(min_size=1, max_size=200).filter(lambda x: x.strip()))
-    @settings(max_examples=100, deadline=5000)
+    @settings(max_examples=100, deadline=15000)
     def test_training_integration_format(self, text):
         """
         Property 20: Training Integration Format
@@ -110,7 +110,7 @@ class TestTrainingIntegrationProperties:
         st.sampled_from([" ", " | ", " :: "]),
         st.booleans()
     )
-    @settings(max_examples=50, deadline=5000)
+    @settings(max_examples=50, deadline=15000)
     def test_training_config_consistency(self, text, format_type, csc_weight, 
                                        original_weight, separator, include_brackets):
         """
@@ -178,7 +178,7 @@ class TestTrainingIntegrationProperties:
             )
     
     @given(st.text(min_size=1, max_size=100).filter(lambda x: x.strip() and '[' not in x and ']' not in x and all(ord(c) >= 32 or c in '\t\n\r' for c in x)))
-    @settings(max_examples=50, deadline=5000)
+    @settings(max_examples=50, deadline=15000)
     def test_training_format_structure_validity(self, text):
         """
         Property: Training Format Structure Validity

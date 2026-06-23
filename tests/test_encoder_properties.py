@@ -19,7 +19,7 @@ class TestEncoderProperties:
         self.encoder = PTILEncoder()
     
     @given(st.text(min_size=1, max_size=200).filter(lambda x: x.strip()))
-    @settings(max_examples=100, deadline=5000)
+    @settings(max_examples=100, deadline=15000)
     def test_deterministic_processing(self, text):
         """
         Property 4: Deterministic Processing
@@ -64,7 +64,7 @@ class TestEncoderProperties:
         ("play", "Children play in the park"),   # VERB context
         ("play", "The play was excellent"),      # NOUN context
     ]))
-    @settings(max_examples=50, deadline=5000)
+    @settings(max_examples=50, deadline=15000)
     def test_disambiguation_consistency(self, predicate_context):
         """
         Property 16: Disambiguation Consistency

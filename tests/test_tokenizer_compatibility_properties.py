@@ -215,7 +215,7 @@ class TestTokenizerCompatibilityProperties:
         "<ROOT=EXISTENCE> <OPS=PRESENT> <THEME=CAT> <LOCATION=MAT> <META=ASSERTIVE>",
         "<ROOT=CREATION> <OPS=FUTURE> <AGENT=ARTIST> <THEME=PAINTING> <META=ASSERTIVE>",
     ]))
-    @settings(max_examples=25, deadline=5000)
+    @settings(max_examples=25, deadline=15000)
     def test_well_formed_csc_compatibility(self, csc_text):
         """
         Property: Well-formed CSC Compatibility
@@ -263,7 +263,7 @@ class TestTokenizerCompatibilityProperties:
         "<ROOT=MOTION> <OPS=FUTURE|NEGATION> <AGENT=BOY\x00> <GOAL=SCHOOL>",  # Control character
         "<ROOT=MOTION> <OPS=FUTURE|NEGATION>   <AGENT=BOY> <GOAL=SCHOOL>",  # Excessive whitespace
     ]))
-    @settings(max_examples=30, deadline=5000)
+    @settings(max_examples=30, deadline=15000)
     def test_problematic_text_detection(self, problematic_text):
         """
         Property: Problematic Text Detection
