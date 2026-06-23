@@ -1,49 +1,10 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-*.egg
+﻿__pycache__/
+*.pyc
+*.pyo
 *.egg-info/
 dist/
 build/
-eggs/
-*.whl
-*.egg
-
-# Virtual environments
-venv/
-.venv/
-env/
-ENV/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Testing
 .pytest_cache/
-.hypothesis/
-htmlcov/
-.coverage
-.coverage.*
-coverage.xml
-
-# Logs
-*.log
-
-# Generated reports
-validation_report.txt
-efficiency_report.txt
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Secrets
-.env
-*.pem
-*.key
+.mypy_cache/
+*.db
+!ptil/ontology/ptil.db

@@ -49,11 +49,13 @@ class ROLESBinder:
             if token.dep_ == "ROOT":
                 if token.pos_ in ["VERB", "AUX"]:
                     return token
-                elif token.pos_ == "NOUN":
-                    return token
 
         for token in doc:
             if token.pos_ == "VERB":
+                return token
+
+        for token in doc:
+            if token.dep_ == "ROOT" and token.pos_ in ["NOUN", "PROPN"]:
                 return token
 
         return None
@@ -89,7 +91,7 @@ class ROLESBinder:
     def _bind_objects_to_roles(self, doc, main_verb: 'Token', root: ROOT,
                                compatible_roles: Set[Role]) -> Dict[Role, Entity]:
         roles = {}
-        object_deps = {"dobj", "pobj", "iobj"}
+        object_deps = {"dobj", "iobj"}
 
         for token in doc:
             if token.head == main_verb and token.dep_ in object_deps:

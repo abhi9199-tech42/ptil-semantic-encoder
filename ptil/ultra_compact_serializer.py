@@ -547,10 +547,6 @@ Target: 80%+ token reduction through maximum compression.
         if not serialized or not serialized.strip():
             return False
         
-        # Should be very short
-        if len(serialized) > 20:  # Ultra-compact should be very short
-            return False
-        
         # Should not contain verbose format markers
         if any(char in serialized for char in ["<", ">", "=", "|"]):
             return False

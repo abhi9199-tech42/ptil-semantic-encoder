@@ -50,12 +50,12 @@ class CrossLingualValidator:
         return self.encoders[language]
     
     def validate_cross_lingual_consistency(self, 
-                                         text_pairs: List[Tuple[str, str, str]]) -> Dict[str, any]:
+                                         text_pairs: List[Tuple[str, str, str, str]]) -> Dict[str, any]:
         """
         Validate that semantically equivalent sentences produce consistent CSCs.
         
         Args:
-            text_pairs: List of (text, language1, language2) tuples for comparison
+            text_pairs: List of (text1, language1, text2, language2) tuples for comparison
             
         Returns:
             Dict containing validation results with consistency metrics

@@ -41,11 +41,15 @@ class PTILConfig:
             env_key = f"{prefix}{key.upper()}"
             val = os.environ.get(env_key)
             if val is not None:
-                field_type = cls.__dataclass_fields__[key].type
-                if field_type is bool:
-                    val = val.lower() in ("1", "true", "yes")
-                elif field_type is int:
-                    val = int(val)
+                field_info = cls.__dataclass_fields__[key]
+                field_type = field_info.type
+                try:
+                    if field_type is bool:
+                        val = val.lower() in ("1", "true", "yes")
+                    elif field_type is int:
+                        val = int(val)
+                except (ValueError, TypeError):
+                    continue
                 env_data[key] = val
         return cls.from_dict(env_data)
 
@@ -55,5 +59,7 @@ class PTILConfig:
     def resolve(self) -> "PTILConfig":
         env_config = PTILConfig.from_env()
         merged = self.to_dict()
-        merged.update({k: v for k, v in env_config.to_dict().items() if v != PTILConfig().__dict__[k]})
+        defaults = PTILConfig().__dict__
+        merged.update({k: v for k, v in env_config.to_dict().items()
+                       if v is not None and v != defaults.get(k)})
         return PTILConfig.from_dict(merged)

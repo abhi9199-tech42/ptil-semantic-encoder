@@ -24,6 +24,9 @@ class OntologyDB:
 
     def __init__(self, db_path: Optional[str] = None):
         if self._initialized:
+            if db_path is not None and db_path != self.db_path:
+                self.close()
+                self.db_path = db_path
             return
         self._initialized = True
         self.db_path = db_path or DB_PATH

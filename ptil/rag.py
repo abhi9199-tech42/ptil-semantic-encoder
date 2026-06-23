@@ -116,7 +116,11 @@ class PTILRAG:
             return []
         
         doc_ids = list(self.documents.keys())
-        matched_idx = doc_ids.index(results[0]["id"])
+        matched_id = results[0]["id"]
+        if matched_id not in doc_ids:
+            return results
+        
+        matched_idx = doc_ids.index(matched_id)
         
         start = max(0, matched_idx - context_window)
         end = min(len(doc_ids), matched_idx + context_window + 1)

@@ -159,9 +159,7 @@ class UltraUltraCompactSerializer:
                 compressed = ultra_part.replace(ops, short)
                 return compressed
         
-        # No compression possible, return as-is (truncated)
-        if len(ultra_part) > 6:
-            return ultra_part[:6] + "."
+        # No compression possible, return as-is (lossless passthrough)
         return ultra_part
     
     def _decompress_roles(self, ultra_ultra_part: str) -> str:
@@ -206,6 +204,6 @@ class UltraUltraCompactSerializer:
         return {
             "ultra_length": len(ultra_compact),
             "ultra_ultra_length": len(ultra_ultra),
-            "compression_ratio": len(ultra_ultra) / len(ultra_compact) if ultra_compact else 0,
+            "compression_ratio": len(ultra_compact) / len(ultra_ultra) if ultra_ultra else 0,
             "bytes_saved": len(ultra_compact) - len(ultra_ultra),
         }
