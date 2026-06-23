@@ -39,6 +39,9 @@ class ROLESBinder:
         prep_roles = self._bind_prepositional_phrases(doc, main_verb, compatible_roles)
         roles.update(prep_roles)
 
+        time_roles = self._bind_time_expressions(doc, main_verb, compatible_roles, roles)
+        roles.update(time_roles)
+
         return self._validate_role_compatibility(roles, root)
 
     def _find_main_verb(self, doc) -> Optional['Token']:
@@ -187,6 +190,36 @@ class ROLESBinder:
             return doc[left_bound:right_bound].text
 
         return token.text
+
+    def _bind_time_expressions(self, doc, main_verb: 'Token',
+                                compatible_roles: Set[Role],
+                                existing_roles: Dict[Role, Entity]) -> Dict[Role, Entity]:
+        roles = {}
+        if Role.TIME in compatible_roles and Role.TIME in existing_roles:
+            return roles
+
+        time_words = {
+            "tomorrow", "yesterday", "today", "morning", "evening", "night",
+            "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",
+            "week", "month", "year", "day", "hour", "quarter",
+            "summer", "winter", "spring", "autumn", "weekend",
+            "now", "soon", "later",
+        }
+
+        for token in doc:
+            if token.pos_ in ["NOUN", "PROPN", "ADJ"]:
+                word = token.text.lower()
+                lemma = token.lemma_.lower()
+                if word in time_words or lemma in time_words:
+                    if Role.TIME not in existing_roles and Role.TIME not in roles:
+                        entity_text = self._extract_noun_phrase(token)
+                        roles[Role.TIME] = Entity(
+                            text=entity_text,
+                            normalized=token.lemma_.lower()
+                        )
+                        break
+
+        return roles
 
     def _validate_role_compatibility(self, roles: Dict[Role, Entity],
                                      root: ROOT) -> Dict[Role, Entity]:

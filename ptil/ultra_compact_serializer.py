@@ -374,49 +374,128 @@ class UltraCompactCSCSerializer:
     
     def _ultra_compress_entity(self, entity_text: str) -> str:
         """
-        Apply ultra-aggressive entity compression.
+        Compress entity text keeping meaning readable.
+        Preserves time, objects, and names that explain the sentence.
         
         Args:
             entity_text: Original entity text
             
         Returns:
-            str: Ultra-compressed entity (often single character)
+            str: Compressed entity (3-4 chars, readable)
         """
         if not entity_text:
             return ""
         
-        # Convert to lowercase for processing
         text = entity_text.lower().strip()
         
-        # Direct dictionary lookup first
-        if text in self.entity_dict:
-            compressed = self.entity_dict[text]
-            if compressed:  # Return if not empty
-                return compressed
+        # Time words - keep readable
+        time_words = {
+            "tomorrow": "tmrw",
+            "yesterday": "yest",
+            "today": "tday",
+            "morning": "morn",
+            "evening": "eve",
+            "night": "nite",
+            "monday": "mon",
+            "tuesday": "tue",
+            "wednesday": "wed",
+            "thursday": "thu",
+            "friday": "fri",
+            "saturday": "sat",
+            "sunday": "sun",
+            "next week": "nwk",
+            "last week": "lwk",
+            "next month": "nmo",
+            "last month": "lmo",
+            "next year": "nyr",
+            "last year": "lyr",
+            "now": "now",
+            "soon": "soon",
+            "later": "later",
+            "before": "befor",
+            "after": "after",
+            "quarter": "qrt",
+            "summer": "sumr",
+            "winter": "wint",
+            "spring": "spr",
+            "autumn": "autm",
+            "weekend": "wknd",
+            "week": "wk",
+            "month": "mo",
+            "year": "yr",
+            "day": "day",
+            "hour": "hr",
+        }
         
-        # Multi-word processing
+        # Object words - keep readable
+        object_words = {
+            "phone": "phon",
+            "laptop": "lapt",
+            "computer": "comp",
+            "book": "book",
+            "car": "car",
+            "house": "house",
+            "school": "scho",
+            "office": "offi",
+            "store": "stor",
+            "park": "park",
+            "mat": "mat",
+            "cat": "cat",
+            "dog": "dog",
+            "boy": "boy",
+            "girl": "girl",
+            "man": "man",
+            "woman": "womn",
+            "child": "chld",
+            "student": "stdnt",
+            "teacher": "teach",
+            "doctor": "doc",
+            "order": "ordr",
+            "package": "pkg",
+            "product": "prod",
+            "password": "pass",
+            "account": "acct",
+            "manager": "mgr",
+            "discount": "disc",
+            "refund": "refnd",
+            "policy": "poly",
+            "weather": "wthr",
+            "rain": "rain",
+            "snow": "snow",
+        }
+        
+        # Check time words first
+        if text in time_words:
+            return time_words[text]
+        
+        # Check object words
+        if text in object_words:
+            return object_words[text]
+        
+        # Remove articles/determiners
+        words_to_remove = {"the", "a", "an", "this", "that", "is", "are", "was", "were", "has", "have", "had", "all", "by", "to", "in", "on", "at", "from", "with"}
         words = text.split()
-        compressed_parts = []
+        filtered = [w for w in words if w not in words_to_remove]
         
-        for word in words:
-            # Check dictionary
-            if word in self.entity_dict:
-                compressed = self.entity_dict[word]
-                if compressed:  # Only add non-empty
-                    compressed_parts.append(compressed)
+        if not filtered:
+            return ""
+        
+        # Compress each word to first 3-4 chars
+        compressed_parts = []
+        for word in filtered:
+            if word in time_words:
+                compressed_parts.append(time_words[word])
+            elif word in object_words:
+                compressed_parts.append(object_words[word])
+            elif len(word) <= 3:
+                compressed_parts.append(word)
             else:
-                # Fallback: first letter of unknown words
-                if word and word[0].isalpha():
-                    compressed_parts.append(word[0])
+                compressed_parts.append(word[:4])
         
         result = "".join(compressed_parts)
         
-        # Final fallback
-        if not result and entity_text:
-            result = entity_text[0].lower()
-        
-        # Limit to 2 characters maximum for ultra-compression
-        return result[:2] if result else ""
+        # Limit to 4 characters
+        return result[:4] if result else ""
     
     def estimate_compression_ratio(self, original_text: str, ultra_compact: str) -> float:
         """

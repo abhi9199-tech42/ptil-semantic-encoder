@@ -34,9 +34,28 @@ class EncodeBatchResponse(BaseModel):
     results: List[EncodeResponse]
 
 
+class IntentResponse(BaseModel):
+    text: str
+    intent: str
+    confidence: float
+    root: str
+    ops: List[str]
+    roles: dict
+    meta: str
+    ultra_compact: str
+
+
+class IntentBatchRequest(BaseModel):
+    texts: List[str]
+
+
+class IntentBatchResponse(BaseModel):
+    results: List[IntentResponse]
+
+
 class HealthResponse(BaseModel):
     status: str = "ok"
-    version: str = "0.4.0"
+    version: str = "0.5.0"
 
 
 def create_app(config: Optional[PTILConfig] = None) -> FastAPI:
@@ -96,6 +115,64 @@ def create_app(config: Optional[PTILConfig] = None) -> FastAPI:
                     for t, r in zip(req.texts, results)
                 ]
             )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @app.post("/intent", response_model=IntentResponse, tags=["classify"])
+    async def classify_intent(req: EncodeRequest, request: Request):
+        ctx = PTILContext.create(
+            language=cfg.language,
+            input_text=req.text,
+            component="intent",
+        )
+        set_context(ctx)
+
+        try:
+            cscs = encoder.encode(req.text)
+            if not cscs:
+                raise HTTPException(status_code=422, detail="Could not classify text")
+
+            csc = cscs[0]
+            ultra = encoder.ultra_compact_serializer.serialize_multiple(cscs)
+
+            intent = csc.root.value.lower()
+            confidence = 0.9 if csc.ops else 0.7
+
+            return IntentResponse(
+                text=req.text,
+                intent=intent,
+                confidence=confidence,
+                root=csc.root.value,
+                ops=[op.value for op in csc.ops],
+                roles={role.value: entity.text for role, entity in csc.roles.items()},
+                meta=csc.meta.value if csc.meta else None,
+                ultra_compact=ultra,
+            )
+        except HTTPException:
+            raise
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @app.post("/intent/batch", response_model=IntentBatchResponse, tags=["classify"])
+    async def classify_intent_batch(req: IntentBatchRequest, request: Request):
+        try:
+            results = []
+            for text in req.texts:
+                cscs = encoder.encode(text)
+                if cscs:
+                    csc = cscs[0]
+                    ultra = encoder.ultra_compact_serializer.serialize_multiple(cscs)
+                    results.append(IntentResponse(
+                        text=text,
+                        intent=csc.root.value.lower(),
+                        confidence=0.9 if csc.ops else 0.7,
+                        root=csc.root.value,
+                        ops=[op.value for op in csc.ops],
+                        roles={role.value: entity.text for role, entity in csc.roles.items()},
+                        meta=csc.meta.value if csc.meta else None,
+                        ultra_compact=ultra,
+                    ))
+            return IntentBatchResponse(results=results)
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 

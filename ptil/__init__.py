@@ -25,8 +25,9 @@ from .logging_context import PTILContext, PTILogger
 from .cache import LRUCache
 from .metrics import MetricsCollector
 from .learning import LearnedROOTMapper
+from .rag import PTILRAG
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 __all__ = [
     "ROOT",
     "Operator", 
@@ -59,4 +60,5 @@ __all__ = [
     "LRUCache",
     "MetricsCollector",
     "LearnedROOTMapper",
+    "PTILRAG",
 ]
