@@ -26,6 +26,8 @@ from .cache import LRUCache
 from .metrics import MetricsCollector
 from .learning import LearnedROOTMapper
 from .rag import PTILRAG
+from .claude_proxy import ClaudeProxy
+from .claude_middleware import safe_claude, safe_claude_stream, compress_for_claude
 
 __version__ = "1.0.1"
 __all__ = [
@@ -61,4 +63,8 @@ __all__ = [
     "MetricsCollector",
     "LearnedROOTMapper",
     "PTILRAG",
+    "ClaudeProxy",
+    "safe_claude",
+    "safe_claude_stream",
+    "compress_for_claude",
 ]

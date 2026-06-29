@@ -374,127 +374,87 @@ class UltraCompactCSCSerializer:
     
     def _ultra_compress_entity(self, entity_text: str) -> str:
         """
-        Compress entity text keeping meaning readable.
-        Preserves time, objects, and names that explain the sentence.
+        Compress entity text using DIGITS ONLY to avoid conflict with role letters.
+        Role codes use lowercase (a,t,g,l,m,s,...), so entities use digits (0-9).
         
         Args:
             entity_text: Original entity text
             
         Returns:
-            str: Compressed entity (3-4 chars, readable)
+            str: Compressed entity (3-4 digits, readable via reverse lookup)
         """
         if not entity_text:
             return ""
         
         text = entity_text.lower().strip()
         
-        # Time words - keep readable
+        # Digit-based entity encoding (avoids conflict with role letters)
+        entity_to_digit = {
+            # People
+            "boy": "001", "girl": "002", "man": "003", "woman": "004",
+            "child": "005", "student": "006", "teacher": "007", "doctor": "008",
+            "he": "009", "she": "010", "they": "011", "we": "012", "i": "013", "you": "014",
+            "person": "015", "people": "016",
+            # Places
+            "school": "101", "house": "102", "home": "103", "office": "104",
+            "park": "105", "store": "106", "library": "107", "kitchen": "108",
+            "room": "109", "hospital": "110", "church": "111", "bank": "112",
+            # Objects
+            "book": "201", "car": "202", "phone": "203", "computer": "204",
+            "table": "205", "chair": "206", "door": "207", "window": "208",
+            "cat": "209", "dog": "210", "food": "211", "water": "212",
+            "money": "213", "paper": "214", "pen": "215", "bag": "216",
+            # Time
+            "tomorrow": "301", "yesterday": "302", "today": "303",
+            "morning": "304", "evening": "305", "night": "306",
+            "monday": "310", "tuesday": "311", "wednesday": "312",
+            "thursday": "313", "friday": "314", "saturday": "315", "sunday": "316",
+            "next week": "320", "last week": "321",
+            "next month": "322", "last month": "323",
+            "next year": "324", "last year": "325",
+            "now": "330", "soon": "331", "later": "332",
+            "week": "340", "month": "341", "year": "342", "day": "343", "hour": "344",
+            # Actions/Concepts
+            "work": "401", "project": "402", "task": "403", "job": "404",
+            "meeting": "405", "class": "406", "lesson": "407",
+            "order": "408", "package": "409", "product": "410",
+            "problem": "411", "solution": "412", "question": "413", "answer": "414",
+            "idea": "415", "plan": "416", "decision": "417",
+            # Adjectives/Properties
+            "big": "501", "small": "502", "good": "503", "bad": "504",
+            "new": "505", "old": "506", "fast": "507", "slow": "508",
+            "hot": "509", "cold": "510", "long": "511", "short": "512",
+        }
+        
+        # Check direct lookup
+        if text in entity_to_digit:
+            return entity_to_digit[text]
+        
+        # Check time words
         time_words = {
-            "tomorrow": "tmrw",
-            "yesterday": "yest",
-            "today": "tday",
-            "morning": "morn",
-            "evening": "eve",
-            "night": "nite",
-            "monday": "mon",
-            "tuesday": "tue",
-            "wednesday": "wed",
-            "thursday": "thu",
-            "friday": "fri",
-            "saturday": "sat",
-            "sunday": "sun",
-            "next week": "nwk",
-            "last week": "lwk",
-            "next month": "nmo",
-            "last month": "lmo",
-            "next year": "nyr",
-            "last year": "lyr",
-            "now": "now",
-            "soon": "soon",
-            "later": "later",
-            "before": "befor",
-            "after": "after",
-            "quarter": "qrt",
-            "summer": "sumr",
-            "winter": "wint",
-            "spring": "spr",
-            "autumn": "autm",
-            "weekend": "wknd",
-            "week": "wk",
-            "month": "mo",
-            "year": "yr",
-            "day": "day",
-            "hour": "hr",
+            "tomorrow": "301", "yesterday": "302", "today": "303",
+            "morning": "304", "evening": "305", "night": "306",
+            "now": "330", "soon": "331", "later": "332",
         }
-        
-        # Object words - keep readable
-        object_words = {
-            "phone": "phon",
-            "laptop": "lapt",
-            "computer": "comp",
-            "book": "book",
-            "car": "car",
-            "house": "house",
-            "school": "scho",
-            "office": "offi",
-            "store": "stor",
-            "park": "park",
-            "mat": "mat",
-            "cat": "cat",
-            "dog": "dog",
-            "boy": "boy",
-            "girl": "girl",
-            "man": "man",
-            "woman": "womn",
-            "child": "chld",
-            "student": "stdnt",
-            "teacher": "teach",
-            "doctor": "doc",
-            "order": "ordr",
-            "package": "pkg",
-            "product": "prod",
-            "password": "pass",
-            "account": "acct",
-            "manager": "mgr",
-            "discount": "disc",
-            "refund": "refnd",
-            "policy": "poly",
-            "weather": "wthr",
-            "rain": "rain",
-            "snow": "snow",
-        }
-        
-        # Check time words first
         if text in time_words:
             return time_words[text]
         
-        # Check object words
-        if text in object_words:
-            return object_words[text]
-        
         # Remove articles/determiners
-        words_to_remove = {"the", "a", "an", "this", "that", "is", "are", "was", "were", "has", "have", "had", "all", "by", "to", "in", "on", "at", "from", "with"}
+        words_to_remove = {"the", "a", "an", "this", "that", "is", "are", "was", "were",
+                          "has", "have", "had", "all", "by", "to", "in", "on", "at",
+                          "from", "with"}
         words = text.split()
         filtered = [w for w in words if w not in words_to_remove]
         
         if not filtered:
             return ""
         
-        # Compress each word to first 3-4 chars
-        compressed_parts = []
-        for word in filtered:
-            if word in time_words:
-                compressed_parts.append(time_words[word])
-            elif word in object_words:
-                compressed_parts.append(object_words[word])
-            elif len(word) <= 3:
-                compressed_parts.append(word)
-            else:
-                compressed_parts.append(word[:4])
+        # Fallback: use hash-based digit encoding
+        result = ""
+        for word in filtered[:2]:
+            h = hash(word) % 1000
+            result += str(h).zfill(3)
         
-        result = "".join(compressed_parts)
-        
-        # Limit to 4 characters
         return result[:4] if result else ""
     
     def estimate_compression_ratio(self, original_text: str, ultra_compact: str) -> float:

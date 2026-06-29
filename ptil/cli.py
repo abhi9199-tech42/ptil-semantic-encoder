@@ -178,6 +178,71 @@ def cmd_cache(args: argparse.Namespace):
         print("Cache cleared")
 
 
+def cmd_compress(args: argparse.Namespace):
+    from .claude_middleware import compress_for_claude
+
+    result = compress_for_claude(
+        text=args.text,
+        compression=args.format,
+        spacy_model=args.model,
+    )
+
+    if args.stats:
+        print("--- Compression Stats ---")
+        print("Original:   %d tokens" % result["raw_tokens"])
+        print("Compressed: %d tokens" % result["compressed_tokens"])
+        print("Reduction:  %.1f%%" % result["reduction_pct"])
+        print()
+        print("Original:   %s" % result["original"])
+        print("Compressed: %s" % result["compressed"])
+    else:
+        print(result["compressed"])
+
+
+def cmd_claude(args: argparse.Namespace):
+    import os
+    from .claude_proxy import ClaudeProxy
+
+    api_key = args.api_key or os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print("Error: API key required. Use --api-key or set ANTHROPIC_API_KEY env var.", file=sys.stderr)
+        sys.exit(1)
+
+    # Get context from file or argument
+    if args.context_file:
+        with open(args.context_file, encoding="utf-8") as f:
+            context = f.read()
+    else:
+        context = args.context
+
+    proxy = ClaudeProxy(
+        api_key=api_key,
+        model=args.model,
+        compression=args.compression,
+    )
+
+    # Show compression stats
+    stats = proxy.get_stats(context)
+    print("--- Compressing data ---")
+    print("Raw tokens:    %d" % stats["raw_tokens"])
+    print("Compressed:    %d" % stats["compressed_tokens"])
+    print("Reduction:     %s" % stats["estimated_cost_savings"])
+    print()
+
+    # Ask Claude
+    print("--- Asking Claude ---")
+    result = proxy.ask(
+        context=context,
+        question=args.question,
+    )
+
+    print("Answer: %s" % result["answer"])
+    print()
+    print("--- Stats ---")
+    print("Tokens sent to Claude: %d" % result["tokens_sent"])
+    print("Compression ratio:     %s" % result["estimated_cost_savings"])
+
+
 def main():
     parser = argparse.ArgumentParser(prog="ptil", description="PTIL - 80% text compression that stays searchable")
     parser.add_argument("--version", action="version", version="%(prog)s 1.0.0")
@@ -235,6 +300,24 @@ def main():
     p_cache.add_argument("--language", default="en")
     p_cache.add_argument("--model", default="en_core_web_sm")
     p_cache.set_defaults(func=cmd_cache)
+
+    # compress
+    p_compress = sub.add_parser("compress", help="Compress text for Claude API")
+    p_compress.add_argument("text", help="Text to compress")
+    p_compress.add_argument("--format", choices=["verbose", "compact", "ultra"], default="verbose")
+    p_compress.add_argument("--model", default="en_core_web_sm")
+    p_compress.add_argument("--stats", action="store_true", help="Show compression stats")
+    p_compress.set_defaults(func=cmd_compress)
+
+    # claude
+    p_claude = sub.add_parser("claude", help="Ask Claude with compressed data (privacy-safe)")
+    p_claude.add_argument("question", help="Question to ask Claude")
+    p_claude.add_argument("--context", required=True, help="Company data to compress")
+    p_claude.add_argument("--context-file", help="File containing company data")
+    p_claude.add_argument("--api-key", help="Anthropic API key (or ANTHROPIC_API_KEY env)")
+    p_claude.add_argument("--model", default="claude-sonnet-4-20250514")
+    p_claude.add_argument("--compression", choices=["verbose", "compact", "ultra"], default="verbose")
+    p_claude.set_defaults(func=cmd_claude)
 
     args = parser.parse_args()
     if args.command is None:
